@@ -135,6 +135,14 @@ def first_section(text: str, headings: tuple[str, ...]) -> tuple[str, str]:
     return "", ""
 
 
+def nested_section(text: str, heading: str, next_headings: tuple[str, ...]) -> str:
+    """读取RTB下的一个三级小节，兼容四级证据分类标题。"""
+    stops = "|".join(re.escape(item) for item in next_headings)
+    pattern = rf"(?ms)^#{{3,4}} {re.escape(heading)}\s*$\n(.*?)(?=^### (?:{stops})\s*$|^## |\Z)"
+    match = re.search(pattern, text)
+    return match.group(1).strip() if match else ""
+
+
 def selected_decision(conclusion: str) -> str | None:
     """提取单一裁决值；“通过”只作为“保留”的展示别名。"""
     match = re.search(
@@ -167,19 +175,34 @@ def validate(text: str) -> list[str]:
             errors.append(f"差异化价值缺少实质门：{gate}")
 
     rtb = section(text, "RTB")
-    for evidence in ("产品证据", "体验证据", "背书证据"):
-        if not re.search(rf"(?m)^### {evidence}\s*$", rtb):
-            errors.append(f"RTB缺少证据分类：{evidence}")
+    has_state_split = bool(re.search(r"(?m)^### 当前RTB\s*$", rtb)) or bool(
+        re.search(r"(?m)^### 目标状态RTB\s*$", rtb)
+    )
+    current_rtb = nested_section(
+        rtb, "当前RTB", ("目标状态RTB",)
+    ) if has_state_split else rtb
+    target_rtb = nested_section(
+        rtb, "目标状态RTB", ()
+    ) if has_state_split else ""
 
-    rtb_lines = rtb_items(rtb)
-    future_terms = r"计划|拟建设|待建设|申请中|明年|未来|准备建设|尚未"
-    future_rtb_lines = [line for line in rtb_lines if re.search(future_terms, line)]
-    if rtb_lines and len(future_rtb_lines) == len(rtb_lines):
-        errors.append("RTB不能只写未来计划或待建设能力")
-    elif not rtb_lines:
-        errors.append("RTB不能只写未来计划或待建设能力")
-    elif future_rtb_lines:
-        errors.append("RTB不能混入未来计划或待建设能力；请逐条移入能力建设或未知项栏")
+    for evidence in ("产品证据", "体验证据", "背书证据"):
+        if not re.search(rf"(?m)^#{{3,4}} {evidence}\s*$", current_rtb):
+            errors.append(f"当前RTB缺少证据分类：{evidence}")
+
+    current_lines = rtb_items(current_rtb)
+    future_terms = r"计划|拟建设|待建设|申请中|明年|未来|准备建设|尚未|目标状态"
+    future_current_lines = [line for line in current_lines if re.search(future_terms, line)]
+    if not current_lines:
+        errors.append("当前RTB不能留空；暂无现有证据时，应把缺口转入目标状态RTB及待验证／待建设台账")
+    elif future_current_lines:
+        errors.append("当前RTB不能混入未来计划或待建设能力；请移入目标状态RTB及能力建设表")
+
+    target_lines = rtb_items(target_rtb)
+    if target_lines:
+        target_terms = r"目标状态|待建设|待验证"
+        unmarked_target_lines = [line for line in target_lines if not re.search(target_terms, line)]
+        if unmarked_target_lines:
+            errors.append("目标状态RTB必须逐条标注‘目标状态／待建设／待验证’，不能写成当前事实")
 
     state_heading, states = first_section(text, STATE_SECTION_HEADINGS)
     state_rows: list[dict[str, str]] = []
