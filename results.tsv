@@ -1,3 +1,4 @@
 timestamp	commit	skill	old_score	new_score	status	dimension	note	eval_mode
 2026-08-21T00:00:00+08:00	80909e7	brand-house-assistant	-	82.3	baseline	all	9维基线；dim8两位独立评审均为dry_run，分数8.0/8.8，均值8.4；dry_run_ratio=100%，dim8有效性警告；runtime_warn=0	dry_run
 2026-08-21T00:10:00+08:00	d2dc431	brand-house-assistant	85.3	86.5	keep	dim3	新增3条显式if-then失败分支；两位独立评审均为dry_run，dim8=8.4，dry_run_ratio=100%，有效性警告；Checkpoint2暂停范围收窄至正式裁决/写入/对外使用	dry_run
+2026-08-21T00:20:00+08:00	07ae27c	brand-house-assistant	86.5	88.2	keep	dim5	品牌共创候选默认最多3个方向并要求结构差异、依据/反证/最小验证/淘汰信号；两位独立评审为dry_run，dim8保守维持8.4，dry_run_ratio=100%，有效性警告	dry_run
