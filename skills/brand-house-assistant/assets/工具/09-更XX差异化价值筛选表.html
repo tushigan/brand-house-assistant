@@ -1,0 +1,1755 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>工具09｜“更XX”差异化价值筛选表</title>
+  <style>
+    :root {
+      --accent: #C2410C;
+      --accent-dark: #9A3412;
+      --accent-light: #FFF7ED;
+      --text: #1A1A1A;
+      --muted: #6B6B6B;
+      --line: #E5E5E5;
+      --soft: #FAFAF9;
+      --green: #166534;
+      --green-bg: #F0FDF4;
+      --amber: #92400E;
+      --amber-bg: #FFFBEB;
+      --blue: #075985;
+      --blue-bg: #F0F9FF;
+      --red: #991B1B;
+      --red-bg: #FEF2F2;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #F3F4F6;
+      color: var(--text);
+      font-family: "Noto Sans CJK SC", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+    }
+
+    .sheet {
+      max-width: 1240px;
+      margin: 24px auto;
+      background: #FFFFFF;
+      padding: 40px 48px 56px;
+      box-shadow: 0 2px 18px rgba(0, 0, 0, .08);
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .08em;
+    }
+
+    h1 {
+      font-size: 30px;
+      line-height: 1.28;
+      margin: 3px 0 4px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 0 0 18px;
+    }
+
+    .confidential {
+      border-left: 4px solid var(--accent);
+      background: var(--accent-light);
+      padding: 10px 13px;
+      font-size: 13px;
+      margin: 16px 0 20px;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 12px;
+      background: rgba(250, 250, 249, .97);
+      border: 1px solid var(--line);
+      margin: 18px 0 24px;
+      backdrop-filter: blur(8px);
+    }
+
+    button {
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #FFFFFF;
+      border-radius: 4px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    button.secondary {
+      background: #FFFFFF;
+      color: var(--accent);
+    }
+
+    button.danger {
+      border-color: #B91C1C;
+      background: #FFFFFF;
+      color: #B91C1C;
+    }
+
+    button:hover { filter: brightness(.97); }
+
+    .save-status {
+      font-size: 12px;
+      color: var(--muted);
+      align-self: center;
+      margin-left: auto;
+    }
+
+    .how {
+      background: #F8FAFC;
+      border: 1px solid var(--line);
+      padding: 14px 16px;
+      font-size: 13px;
+    }
+
+    .how strong { color: var(--accent); }
+
+    h2 {
+      margin: 30px 0 11px;
+      padding-top: 9px;
+      border-top: 2px solid var(--accent);
+      font-size: 19px;
+      break-after: avoid;
+    }
+
+    h3 {
+      margin: 18px 0 8px;
+      font-size: 15px;
+    }
+
+    .hint {
+      margin: 6px 0 12px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 16px;
+    }
+
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .required::after {
+      content: " *";
+      color: #DC2626;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #CFCFCF;
+      border-radius: 4px;
+      padding: 8px 9px;
+      font: inherit;
+      font-size: 13px;
+      background: #FFFFFF;
+      color: var(--text);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid #FED7AA;
+      border-color: var(--accent);
+    }
+
+    textarea {
+      min-height: 76px;
+      resize: vertical;
+    }
+
+    .short-textarea { min-height: 58px; }
+
+    .formula {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+      align-items: stretch;
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .formula-item {
+      border: 1px solid #FDBA74;
+      background: var(--accent-light);
+      border-radius: 6px;
+      padding: 10px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .formula-arrow {
+      align-self: center;
+      color: #A8A29E;
+      font-size: 22px;
+    }
+
+    .gate-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 12px 0;
+      break-inside: avoid;
+    }
+
+    .gate-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .gate-title {
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .gate-question {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .gate-result {
+      flex: 0 0 160px;
+    }
+
+    .gate-result label { font-size: 12px; }
+
+    .format-check {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 230px;
+      gap: 16px;
+      align-items: end;
+      border: 2px solid #FDBA74;
+      background: var(--accent-light);
+      padding: 14px;
+      margin: 12px 0;
+      border-radius: 8px;
+    }
+
+    .format-message {
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      min-height: 44px;
+    }
+
+    .message-neutral { background: #F5F5F4; color: #57534E; }
+    .message-pass { background: var(--green-bg); color: var(--green); }
+    .message-fail { background: var(--red-bg); color: var(--red); }
+
+    .generic-gate {
+      border: 1px solid #F59E0B;
+      border-radius: 8px;
+      background: #FFFBEB;
+      padding: 12px 14px;
+      margin: 12px 0;
+    }
+
+    .generic-gate .generic-fields {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px 12px;
+      margin-top: 10px;
+    }
+
+    .generic-gate .generic-fields textarea,
+    .generic-gate .generic-fields input,
+    .generic-gate .generic-fields select { min-height: 54px; }
+
+    .generic-gate .generic-fields select { min-height: 38px; }
+
+    .candidate-card {
+      border: 1px solid #D6D3D1;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 18px 0;
+      break-inside: avoid;
+    }
+
+    .candidate-card.core { border-top: 4px solid var(--accent); }
+    .candidate-card.aux { border-top: 4px solid #64748B; }
+
+    .candidate-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .candidate-heading h3 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .role-note {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.5;
+    }
+
+    .badge-verified { background: #DCFCE7; color: var(--green); }
+    .badge-pending { background: #FEF3C7; color: var(--amber); }
+    .badge-building { background: #E0F2FE; color: var(--blue); }
+    .badge-rejected { background: #FEE2E2; color: var(--red); }
+    .badge-neutral { background: #E7E5E4; color: #57534E; }
+
+    .result-box {
+      border: 2px solid #D6D3D1;
+      border-radius: 10px;
+      padding: 16px;
+      margin: 16px 0;
+      break-inside: avoid;
+    }
+
+    .result-box.pass { border-color: #86EFAC; background: var(--green-bg); }
+    .result-box.pending { border-color: #FCD34D; background: var(--amber-bg); }
+    .result-box.building { border-color: #7DD3FC; background: var(--blue-bg); }
+    .result-box.fail { border-color: #FCA5A5; background: var(--red-bg); }
+    .result-box.neutral { background: #FAFAF9; }
+
+    .result-title {
+      font-size: 18px;
+      font-weight: 850;
+      margin-bottom: 4px;
+    }
+
+    .result-detail {
+      font-size: 13px;
+      white-space: pre-line;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      margin: 10px 0;
+    }
+
+    th,
+    td {
+      border: 1px solid #D8D8D8;
+      padding: 8px;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--accent);
+      color: #FFFFFF;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    td[contenteditable="true"] {
+      background: #FFFEFB;
+      min-width: 80px;
+      min-height: 42px;
+    }
+
+    td[contenteditable="true"]:focus { outline: 2px solid #FED7AA; }
+
+    .evidence-split {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .evidence-split label {
+      font-size: 11px;
+      margin-bottom: 3px;
+    }
+
+    .editable-cell {
+      min-height: 54px;
+      border: 1px solid #CFCFCF;
+      border-radius: 4px;
+      background: #FFFEFB;
+      padding: 7px;
+    }
+
+    .editable-cell:focus {
+      outline: 2px solid #FED7AA;
+      border-color: var(--accent);
+    }
+
+    .decision {
+      border: 1px solid #FDBA74;
+      background: var(--accent-light);
+      padding: 15px;
+      break-inside: avoid;
+    }
+
+    .boundary {
+      border-left: 4px solid #64748B;
+      background: #F8FAFC;
+      padding: 12px 14px;
+      font-size: 13px;
+      margin: 14px 0;
+    }
+
+    .checkbox-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 6px 0;
+      font-size: 13px;
+    }
+
+    .checkbox-line input {
+      width: auto;
+      margin-top: 4px;
+    }
+
+    .footer {
+      margin-top: 30px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    @media (max-width: 800px) {
+      .sheet { margin: 0; padding: 24px 18px; }
+      .grid, .grid.three, .grid.four { grid-template-columns: 1fr; }
+      .formula { grid-template-columns: 1fr; }
+      .formula-arrow { transform: rotate(90deg); justify-self: center; }
+      .format-check { grid-template-columns: 1fr; }
+      .generic-gate .generic-fields { grid-template-columns: 1fr; }
+      .gate-header { flex-direction: column; }
+      .gate-result { flex-basis: auto; width: 100%; }
+      .save-status { width: 100%; margin-left: 0; }
+      .evidence-split { grid-template-columns: 1fr; }
+      table { font-size: 11px; table-layout: fixed; }
+      th, td { padding: 5px; overflow-wrap: anywhere; }
+      td[contenteditable="true"] { min-width: 0; }
+      .mobile-stack-table,
+      .mobile-stack-table tbody,
+      .mobile-stack-table tr,
+      .mobile-stack-table td { display: block; width: 100%; }
+      .mobile-stack-table thead { display: none; }
+      .mobile-stack-table tr {
+        border: 1px solid #D8D8D8;
+        margin: 10px 0;
+        background: #FFFFFF;
+      }
+      .mobile-stack-table td { border: 0; border-bottom: 1px solid #E7E5E4; }
+      .mobile-stack-table td:last-child { border-bottom: 0; }
+      .mobile-stack-table .gate-select { width: 100%; min-width: 0; }
+    }
+
+    @media print {
+      @page { size: A4 portrait; margin: 12mm; }
+      body { background: #FFFFFF; }
+      .sheet {
+        margin: 0;
+        max-width: none;
+        box-shadow: none;
+        padding: 0;
+      }
+      .toolbar { display: none !important; }
+      .candidate-card, .gate-panel, .result-box, .decision, .how, .boundary { break-inside: avoid; }
+      h2, h3 { break-after: avoid; }
+      input, select, textarea {
+        border-color: #A8A29E;
+        background: #FFFFFF !important;
+        color: #000000;
+      }
+      textarea { min-height: 54px; }
+      .status-badge, .result-box, .format-message, th {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <div class="eyebrow">快消食品品牌屋构建橙皮书 · 工具 09</div>
+    <h1>“更XX”差异化价值筛选表</h1>
+    <p class="subtitle">Differentiated Value Gate and Evidence Record</p>
+
+    <div class="confidential">公司内部资料，请勿外传。本表检查的是定位三角中的“差异化价值”字段，不是对外广告审批表。任何内部“更XX”进入包装、标签、广告、详情页、直播、招商或销售话术前，仍需完成事实、比较、食品法规与引证核查。</div>
+
+    <div class="toolbar">
+      <button type="button" onclick="evaluateAll()">检查全部门禁</button>
+      <button type="button" class="secondary" onclick="saveDraft()">保存本机草稿</button>
+      <button type="button" class="secondary" onclick="exportDraft()">导出 JSON</button>
+      <button type="button" class="secondary" onclick="document.getElementById('importFile').click()">导入 JSON</button>
+      <button type="button" class="secondary" onclick="window.print()">打印／导出 PDF</button>
+      <button type="button" class="danger" onclick="clearDraft()">清空本表</button>
+      <input id="importFile" type="file" accept="application/json,.json" hidden>
+      <span class="save-status" id="saveStatus">请先填写候选，再执行“检查全部门禁”。</span>
+    </div>
+
+    <div class="how">
+      <strong>谁填写：</strong>品牌／策略负责人牵头，产品、研发、质量、供应链、销售、渠道、消费者研究与合规共同补证。<br>
+      <strong>何时填写：</strong>定位三角前两角已经明确，准备筛选差异化价值时；新证据、重大产品变化或年度复盘时重评。<br>
+      <strong>怎么判：</strong>先过“更XX”格式门，再逐项判断对手明确、用户重要、影响选择、RTB成立、相对持续；不能用总分抵消关键门禁。<br>
+      <strong>过程辅助输出（非正式裁决）：</strong>正式采用、目标状态待验证、目标状态待建设、退回具体化或淘汰未采用，并记录核心／辅助价值与能力缺口。总体辅助判断取全部保留候选中的最弱有效状态；正式输出另填四维状态。
+    </div>
+
+    <h2>一、项目与定位三角前提</h2>
+    <div class="grid four">
+      <div>
+        <label class="required">品牌名称</label>
+        <input data-field="brand" placeholder="一张表只评一个独立品牌">
+      </div>
+      <div>
+        <label class="required">战略周期／版本</label>
+        <input data-field="cycle" placeholder="例：2026—2028／V1.0">
+      </div>
+      <div>
+        <label>评审日期</label>
+        <input type="date" data-field="reviewDate">
+      </div>
+      <div>
+        <label>牵头人</label>
+        <input data-field="owner">
+      </div>
+    </div>
+    <div class="grid three" style="margin-top:12px">
+      <div>
+        <label class="required">品类定位</label>
+        <textarea class="short-textarea" data-field="category" placeholder="用用户会搜索、比较和购买时理解的品类语言"></textarea>
+      </div>
+      <div>
+        <label class="required">核心客群</label>
+        <textarea class="short-textarea" data-field="audience" placeholder="本阶段优先服务、最在意这项价值的人"></textarea>
+      </div>
+      <div>
+        <label class="required">核心消费场景</label>
+        <textarea class="short-textarea" data-field="scene" placeholder="时刻、地点、任务、触发和使用情境"></textarea>
+      </div>
+    </div>
+
+    <div class="boundary">
+      <strong>字段边界：</strong>本表的“更XX”硬门只适用于差异化价值。品牌定位、品牌主张、品牌口号、产品口号和战役广告语不以是否带“更”字作为合格条件。
+    </div>
+
+    <h2>二、从产品事实到“更XX”候选</h2>
+    <div class="formula" aria-label="产品事实到用户利益到更XX再到RTB">
+      <div class="formula-item">产品事实</div>
+      <div class="formula-arrow">→</div>
+      <div class="formula-item">用户利益</div>
+      <div class="formula-arrow">→</div>
+      <div class="formula-item">“更XX”候选</div>
+      <div class="formula-arrow">→</div>
+      <div class="formula-item">RTB回证</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:24%">可核验的产品／体验事实</th>
+          <th style="width:24%">在核心场景中的用户利益</th>
+          <th style="width:18%">相对谁或什么方案</th>
+          <th style="width:18%">候选“更XX”</th>
+          <th style="width:16%">可回读来源</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td contenteditable="true" data-field="sourceFact1"></td>
+          <td contenteditable="true" data-field="userBenefit1"></td>
+          <td contenteditable="true" data-field="comparison1"></td>
+          <td contenteditable="true" data-field="candidateSource1"></td>
+          <td contenteditable="true" data-field="mappingSource1"></td>
+        </tr>
+        <tr>
+          <td contenteditable="true" data-field="sourceFact2"></td>
+          <td contenteditable="true" data-field="userBenefit2"></td>
+          <td contenteditable="true" data-field="comparison2"></td>
+          <td contenteditable="true" data-field="candidateSource2"></td>
+          <td contenteditable="true" data-field="mappingSource2"></td>
+        </tr>
+        <tr>
+          <td contenteditable="true" data-field="sourceFact3"></td>
+          <td contenteditable="true" data-field="userBenefit3"></td>
+          <td contenteditable="true" data-field="comparison3"></td>
+          <td contenteditable="true" data-field="candidateSource3"></td>
+          <td contenteditable="true" data-field="mappingSource3"></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="hint">正式总体结论前，至少一行必须完整填写事实→用户利益→比较对象→“更XX”候选，并留下可回读来源。产品事实不是差异化价值；用户利益也未必构成差异。</p>
+
+    <h2>三、候选A｜拟定核心“更XX”</h2>
+    <section class="candidate-card core" data-candidate="core">
+      <div class="candidate-heading">
+        <h3>核心主价值候选</h3>
+        <span class="role-note">正式定案时，品牌屋主图只能有一条核心主价值。</span>
+      </div>
+
+      <div class="grid three">
+        <div>
+          <label class="required">候选差异化价值</label>
+          <input id="corePhrase" data-field="corePhrase" placeholder="必须以“更”开头，例如：更省事的工作日早餐">
+        </div>
+        <div>
+          <label class="required">角色</label>
+          <select data-field="coreRole" id="coreRole">
+            <option value="核心主价值">核心主价值</option>
+            <option value="辅助价值">辅助价值</option>
+            <option value="待排序">待排序</option>
+          </select>
+        </div>
+        <div>
+          <label class="required">候选推进状态（辅助判断，非正式裁决）</label>
+          <select data-field="coreEvidenceState" id="coreEvidenceState">
+            <option value="">请选择</option>
+            <option value="已验证">已证实</option>
+            <option value="待验证">待验证</option>
+            <option value="待建设">待建设</option>
+            <option value="淘汰">淘汰</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="format-check">
+        <div>
+          <label>格式门自动结果</label>
+          <div class="format-message message-neutral" id="coreFormatMessage">尚未检查。正式候选必须以“更”开头，且“更”后面有明确利益短语。</div>
+        </div>
+        <div>
+          <label>内部／外部使用边界</label>
+          <select data-field="coreUsageBoundary">
+            <option value="">请选择</option>
+            <option>仅供内部候选讨论</option>
+            <option>可进入目标状态主图，必须标状态</option>
+            <option>已验证但尚未完成对外声称核查</option>
+            <option>已另行完成对外声称核查</option>
+            <option>不得使用／已淘汰</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="generic-gate" id="coreGenericGate">
+        <div class="format-message message-neutral" id="coreGenericMessage">仅当候选以“更优质”、“更健康”、“更好吃”、“更安全”、“更天然”、“更营养”等泛化词开头时触发。这是内部方法门，不是法规判定。</div>
+        <div class="generic-fields">
+          <div>
+            <label>泛化候选的具体定义</label>
+            <textarea class="short-textarea" data-field="coreGenericDefinition" placeholder="把“健康”等泛化词定义成可观察、可比较的指标"></textarea>
+          </div>
+          <div>
+            <label>具体比较条件</label>
+            <textarea class="short-textarea" data-field="coreGenericComparison" placeholder="同场景、同品类、同规格下与谁比什么"></textarea>
+          </div>
+          <div>
+            <label>可回读来源</label>
+            <textarea class="short-textarea" data-field="coreGenericSource" placeholder="文件、记录、URL或来源ID，能回到原文"></textarea>
+          </div>
+          <div>
+            <label>评审人确认</label>
+            <select data-field="coreGenericReview">
+              <option value="">未确认</option>
+              <option value="已确认">已确认</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="gate-panel">
+        <div class="gate-header">
+          <div>
+            <div class="gate-title">门1｜对手明确</div>
+            <div class="gate-question">相对哪一类竞品、替代方案、旧方案或用户当前做法更XX？</div>
+          </div>
+          <div class="gate-result">
+            <label class="required">门禁结论</label>
+            <select data-field="coreGateOpponent" class="gate-select">
+              <option value="">请选择</option>
+              <option value="通过">通过</option>
+              <option value="待验证">待验证</option>
+              <option value="不通过">不通过</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid three">
+          <div>
+            <label>比较对象</label>
+            <textarea class="short-textarea" data-field="coreOpponent" placeholder="不要只写“行业”或“竞品”"></textarea>
+          </div>
+          <div>
+            <label>比较维度与条件</label>
+            <textarea class="short-textarea" data-field="coreOpponentDimension" placeholder="同场景、同品类、同规格或同任务下比较什么"></textarea>
+          </div>
+          <div>
+            <label>依据／反证</label>
+            <textarea class="short-textarea" data-field="coreOpponentEvidence" placeholder="竞品盘点、货架、渠道、用户替代行为及反例"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="gate-panel">
+        <div class="gate-header">
+          <div>
+            <div class="gate-title">门2｜用户重要</div>
+            <div class="gate-question">核心客群为什么在意？发生在哪个场景？有何行为或访谈证据？</div>
+          </div>
+          <div class="gate-result">
+            <label class="required">门禁结论</label>
+            <select data-field="coreGateUser" class="gate-select">
+              <option value="">请选择</option>
+              <option value="通过">通过</option>
+              <option value="待验证">待验证</option>
+              <option value="不通过">不通过</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid three">
+          <div>
+            <label>谁在什么时刻最在意</label>
+            <textarea class="short-textarea" data-field="coreUserScene"></textarea>
+          </div>
+          <div>
+            <label>重要性证据</label>
+            <textarea class="short-textarea" data-field="coreUserEvidence" placeholder="原话、观察、搜索、投诉、试吃、复购或放弃原因"></textarea>
+          </div>
+          <div>
+            <label>反证与边界</label>
+            <textarea class="short-textarea" data-field="coreUserCounter" placeholder="哪些人不在意，在哪些场景不成立"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="gate-panel">
+        <div class="gate-header">
+          <div>
+            <div class="gate-title">门3｜影响选择</div>
+            <div class="gate-question">它希望影响理解、进入考虑、尝试、复购还是支付？如何验证？</div>
+          </div>
+          <div class="gate-result">
+            <label class="required">门禁结论</label>
+            <select data-field="coreGateChoice" class="gate-select">
+              <option value="">请选择</option>
+              <option value="通过">通过</option>
+              <option value="待验证">待验证</option>
+              <option value="不通过">不通过</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid three">
+          <div>
+            <label>希望影响哪种选择</label>
+            <textarea class="short-textarea" data-field="coreChoiceTarget" placeholder="理解／考虑／尝试／复购／支付"></textarea>
+          </div>
+          <div>
+            <label>现有证据</label>
+            <textarea class="short-textarea" data-field="coreChoiceEvidence"></textarea>
+          </div>
+          <div>
+            <label>下一步验证</label>
+            <textarea class="short-textarea" data-field="coreChoicePlan" placeholder="概念、货架、试吃、复购或价格测试"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="gate-panel">
+        <div class="gate-header">
+          <div>
+            <div class="gate-title">门4｜RTB成立</div>
+            <div class="gate-question">有哪些产品、体验或背书证据？没有证据时，能力建设任务是否明确？</div>
+          </div>
+          <div class="gate-result">
+            <label class="required">门禁结论</label>
+            <select data-field="coreGateRtb" class="gate-select">
+              <option value="">请选择</option>
+              <option value="通过">通过</option>
+              <option value="待验证">待验证</option>
+              <option value="待建设">待建设</option>
+              <option value="不通过">不通过</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid three">
+          <div>
+            <label>产品证据</label>
+            <textarea class="short-textarea" data-field="coreProductEvidence" placeholder="原料、配方、工艺、技术、规格或结果"></textarea>
+          </div>
+          <div>
+            <label>体验证据</label>
+            <textarea class="short-textarea" data-field="coreExperienceEvidence" placeholder="口感、使用、服务、交付或可感知结果"></textarea>
+          </div>
+          <div>
+            <label>背书证据</label>
+            <textarea class="short-textarea" data-field="coreEndorsementEvidence" placeholder="检测、认证、专利、第三方认可等；必须可核查"></textarea>
+          </div>
+        </div>
+        <label style="margin-top:10px">待补证据／能力建设任务</label>
+        <textarea class="short-textarea" data-field="coreCapabilityGap" placeholder="写清任务、负责人、验证方法和截止时间；不要把未来能力写成现有RTB"></textarea>
+      </div>
+
+      <div class="gate-panel">
+        <div class="gate-header">
+          <div>
+            <div class="gate-title">门5｜相对持续</div>
+            <div class="gate-question">竞争者多久能复制同等体验？它由一句话、单点卖点，还是一组能力共同支撑？</div>
+          </div>
+          <div class="gate-result">
+            <label class="required">门禁结论</label>
+            <select data-field="coreGateDurable" class="gate-select">
+              <option value="">请选择</option>
+              <option value="通过">通过</option>
+              <option value="待验证">待验证</option>
+              <option value="不通过">不通过</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid three">
+          <div>
+            <label>预计可持续窗口</label>
+            <textarea class="short-textarea" data-field="coreWindow" placeholder="例：短期易复制／需12个月能力积累／长期系统支撑"></textarea>
+          </div>
+          <div>
+            <label>支撑它的能力组合</label>
+            <textarea class="short-textarea" data-field="coreSystem" placeholder="供应、研发、服务、数据、渠道、组织或品牌资产"></textarea>
+          </div>
+          <div>
+            <label>竞品复制风险与反制</label>
+            <textarea class="short-textarea" data-field="coreCopyRisk"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-box neutral" id="coreResult">
+        <div class="result-title">核心候选尚未检查</div>
+        <div class="result-detail">填写“更XX”、五项门禁与证据状态后，点击页面上方“检查全部门禁”。</div>
+      </div>
+    </section>
+
+    <h2>四、候选B｜辅助价值（可选）</h2>
+    <section class="candidate-card aux" data-candidate="aux">
+      <div class="candidate-heading">
+        <h3>辅助价值候选</h3>
+        <span class="role-note">辅助价值也必须独立过门；标为“淘汰”即退出最终方案，不参与总体状态。</span>
+      </div>
+
+      <div class="grid three">
+        <div>
+          <label>候选差异化价值</label>
+          <input id="auxPhrase" data-field="auxPhrase" placeholder="不填写则不参与门禁">
+        </div>
+        <div>
+          <label>角色</label>
+          <select data-field="auxRole" id="auxRole">
+            <option value="辅助价值">辅助价值</option>
+            <option value="核心主价值">核心主价值</option>
+            <option value="待排序">待排序</option>
+          </select>
+        </div>
+        <div>
+          <label>候选推进状态（辅助判断，非正式裁决）</label>
+          <select data-field="auxEvidenceState" id="auxEvidenceState">
+            <option value="">请选择</option>
+            <option value="已验证">已证实</option>
+            <option value="待验证">待验证</option>
+            <option value="待建设">待建设</option>
+            <option value="淘汰">淘汰</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="format-check">
+        <div>
+          <label>格式门自动结果</label>
+          <div class="format-message message-neutral" id="auxFormatMessage">不填写则不参与评审；一旦填写，必须以“更”开头。</div>
+        </div>
+        <div>
+          <label>它如何辅助核心价值</label>
+          <textarea class="short-textarea" data-field="auxSupportRelation" placeholder="不能与核心价值争夺同一位置"></textarea>
+        </div>
+      </div>
+
+      <div class="generic-gate" id="auxGenericGate">
+        <div class="format-message message-neutral" id="auxGenericMessage">仅当候选以泛化词开头时触发。泛化候选必须补具体定义、比较条件、可回读来源，并由评审人确认。</div>
+        <div class="generic-fields">
+          <div>
+            <label>泛化候选的具体定义</label>
+            <textarea class="short-textarea" data-field="auxGenericDefinition" placeholder="把泛化词定义成可观察、可比较的指标"></textarea>
+          </div>
+          <div>
+            <label>具体比较条件</label>
+            <textarea class="short-textarea" data-field="auxGenericComparison" placeholder="同场景、同品类、同规格下与谁比什么"></textarea>
+          </div>
+          <div>
+            <label>可回读来源</label>
+            <textarea class="short-textarea" data-field="auxGenericSource" placeholder="文件、记录、URL或来源ID，能回到原文"></textarea>
+          </div>
+          <div>
+            <label>评审人确认</label>
+            <select data-field="auxGenericReview">
+              <option value="">未确认</option>
+              <option value="已确认">已确认</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <table class="mobile-stack-table">
+        <thead>
+          <tr>
+            <th>实质门</th>
+            <th style="width:18%">结论</th>
+            <th>关键依据／反证／下一步</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>对手明确</strong><br>相对谁更？</td>
+            <td>
+              <select data-field="auxGateOpponent" class="gate-select">
+                <option value="">请选择</option>
+                <option value="通过">通过</option>
+                <option value="待验证">待验证</option>
+                <option value="不通过">不通过</option>
+              </select>
+            </td>
+            <td contenteditable="true" data-field="auxOpponentEvidence"></td>
+          </tr>
+          <tr>
+            <td><strong>用户重要</strong><br>谁在意，为什么？</td>
+            <td>
+              <select data-field="auxGateUser" class="gate-select">
+                <option value="">请选择</option>
+                <option value="通过">通过</option>
+                <option value="待验证">待验证</option>
+                <option value="不通过">不通过</option>
+              </select>
+            </td>
+            <td contenteditable="true" data-field="auxUserEvidence"></td>
+          </tr>
+          <tr>
+            <td><strong>影响选择</strong><br>影响理解、尝试、复购或支付中的哪一项？</td>
+            <td>
+              <select data-field="auxGateChoice" class="gate-select">
+                <option value="">请选择</option>
+                <option value="通过">通过</option>
+                <option value="待验证">待验证</option>
+                <option value="不通过">不通过</option>
+              </select>
+            </td>
+            <td contenteditable="true" data-field="auxChoiceEvidence"></td>
+          </tr>
+          <tr>
+            <td><strong>RTB成立</strong><br>当前有什么证据？未来还要补什么？</td>
+            <td>
+              <select data-field="auxGateRtb" class="gate-select">
+                <option value="">请选择</option>
+                <option value="通过">通过</option>
+                <option value="待验证">待验证</option>
+                <option value="待建设">待建设</option>
+                <option value="不通过">不通过</option>
+              </select>
+            </td>
+            <td>
+              <div class="evidence-split">
+                <div>
+                  <label>现有RTB证据</label>
+                  <div class="editable-cell" contenteditable="true" data-field="auxRtbEvidence"></div>
+                </div>
+                <div>
+                  <label>待补证据／能力建设任务</label>
+                  <div class="editable-cell" contenteditable="true" data-field="auxCapabilityGap"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>相对持续</strong><br>多久会被复制，靠什么能力组合？</td>
+            <td>
+              <select data-field="auxGateDurable" class="gate-select">
+                <option value="">请选择</option>
+                <option value="通过">通过</option>
+                <option value="待验证">待验证</option>
+                <option value="不通过">不通过</option>
+              </select>
+            </td>
+            <td contenteditable="true" data-field="auxDurableEvidence"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="result-box neutral" id="auxResult">
+        <div class="result-title">辅助候选尚未检查</div>
+        <div class="result-detail">辅助价值可留空；填写后与核心价值使用同一套硬门禁。标为淘汰后将显示“淘汰未采用”，不再拖低总体状态。</div>
+      </div>
+    </section>
+
+    <h2>五、主次、目标状态与能力缺口</h2>
+    <div class="grid three">
+      <div>
+        <label class="required">最终核心主价值</label>
+        <input data-field="finalCore" placeholder="必须与候选A的“更XX”一致">
+      </div>
+      <div>
+        <label>最终辅助价值</label>
+        <input data-field="finalAux" placeholder="可留空；有则写清排序">
+      </div>
+      <div>
+        <label class="required">本轮辅助判断（非正式裁决）</label>
+        <select data-field="overallState" id="overallState">
+          <option value="">请选择</option>
+          <option value="已验证">已证实</option>
+          <option>待验证</option>
+          <option>待建设</option>
+          <option>淘汰</option>
+        </select>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:10%">对应候选</th>
+          <th>当前事实</th>
+          <th>目标状态</th>
+          <th>能力／证据缺口</th>
+          <th>责任人</th>
+          <th>验证方式与截止时间</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>核心候选</strong></td>
+          <td contenteditable="true" data-field="currentFactFinal"></td>
+          <td contenteditable="true" data-field="targetStateFinal"></td>
+          <td contenteditable="true" data-field="gapFinal"></td>
+          <td contenteditable="true" data-field="gapOwnerFinal"></td>
+          <td contenteditable="true" data-field="verificationFinal"></td>
+        </tr>
+        <tr>
+          <td><strong>辅助候选</strong><br><span class="hint">保留时必填</span></td>
+          <td contenteditable="true" data-field="currentFactFinal2"></td>
+          <td contenteditable="true" data-field="targetStateFinal2"></td>
+          <td contenteditable="true" data-field="gapFinal2"></td>
+          <td contenteditable="true" data-field="gapOwnerFinal2"></td>
+          <td contenteditable="true" data-field="verificationFinal2"></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="hint">状态表第1行对应核心候选，第2行对应辅助候选；保留辅助时，第2行的当前事实、目标状态、能力／证据缺口、责任人、验证方式与截止时间均为必填。最终核心主价值必须原样采用候选A（忽略首尾引号和标点）。品牌屋主图只放“目标状态”；当前事实、能力缺口、建设动作与负责人留在本表。</p>
+
+    <h2>六、总体硬门禁结果</h2>
+    <div class="result-box neutral" id="overallResult">
+      <div class="result-title">尚未生成总体辅助判断（非正式裁决）</div>
+      <div class="result-detail">先取全部保留候选的最弱有效状态，再检查项目前提、最终交付、评审裁决与六项勾选是否完整。</div>
+    </div>
+
+    <div class="decision">
+      <label class="required">方案处理建议（辅助判断，非正式裁决）</label>
+      <select data-field="decision">
+        <option value="">请选择</option>
+        <option>正式采用，进入品牌屋主图</option>
+        <option>目标状态待验证，标记后进入主图</option>
+        <option>目标状态待建设，标记后进入主图</option>
+        <option>退回具体化，补证据后重评</option>
+        <option>降为一般利益／产品卖点／口号线索</option>
+        <option>淘汰</option>
+      </select>
+      <div class="grid four" style="margin-top:10px">
+        <div><label>内容性质</label><select data-field="formalNature"><option value="">请选择</option><option>当前事实</option><option>策略假设</option></select></div>
+        <div><label>证据状态</label><select data-field="formalEvidence"><option value="">请选择</option><option>已证实</option><option>待验证</option></select></div>
+        <div><label>能力状态</label><select data-field="formalAbility"><option value="">请选择</option><option>已具备</option><option>待建设</option></select></div>
+        <div><label>正式裁决</label><select data-field="formalDecision"><option value="">请选择</option><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></div>
+      </div>
+      <div class="grid two" style="margin-top:10px">
+        <div>
+          <label>裁决理由与反对意见</label>
+          <textarea data-field="decisionReason" placeholder="保留未被采纳的反证，不要只写会议共识"></textarea>
+        </div>
+        <div>
+          <label>下一步动作、责任人与日期</label>
+          <textarea data-field="nextAction"></textarea>
+        </div>
+      </div>
+      <div class="grid three" style="margin-top:10px">
+        <div>
+          <label>项目负责人</label>
+          <input data-field="projectApprover">
+        </div>
+        <div>
+          <label>产品／研发／质量确认</label>
+          <input data-field="productApprover">
+        </div>
+        <div>
+          <label>合规／法务确认（如涉及对外声称）</label>
+          <input data-field="complianceApprover">
+        </div>
+      </div>
+    </div>
+
+    <h2>七、提交前勾选</h2>
+    <label class="checkbox-line"><input type="checkbox" data-field="checkOneBrand"> 本表只对应一个独立品牌和一个明确战略周期。</label>
+    <label class="checkbox-line"><input type="checkbox" data-field="checkOneCore"> 最终只有一条核心主价值；辅助价值已经排序并独立过门。</label>
+    <label class="checkbox-line"><input type="checkbox" data-field="checkFactValue"> 没有把产品事实、工艺、原料、规格直接当作差异化价值。</label>
+    <label class="checkbox-line"><input type="checkbox" data-field="checkStatus"> 当前事实、目标状态、待验证与待建设已经分开记录。</label>
+    <label class="checkbox-line"><input type="checkbox" data-field="checkBoundary"> 没有把“更XX”句式门误用到品牌定位、品牌主张、品牌口号、产品口号或战役广告语。</label>
+    <label class="checkbox-line"><input type="checkbox" data-field="checkExternal"> 已确认本表仅供内部；如准备对外使用，已另行完成食品、广告、比较声称与引证核查。</label>
+
+    <div class="footer">
+      关联阅读：§09 用“更XX”定义差异化价值；§10 定位三角与品牌定位；§11 RTB证据系统；§14 品牌口号、产品口号与战役广告语。<br>
+      版本：样章工作版 · 未本 sky。浏览器草稿保存在本机；请用JSON或PDF归档正式评审记录。
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const storageKey = "fmcg-brand-house-tool-09:" + location.pathname;
+      const fieldElements = () => Array.from(document.querySelectorAll("[data-field]"));
+      const importFile = document.getElementById("importFile");
+
+      function readField(element) {
+        if (element.type === "checkbox") return element.checked;
+        if (element.matches('[contenteditable="true"]')) return element.innerHTML;
+        return element.value;
+      }
+
+      function writeField(element, value) {
+        if (element.type === "checkbox") {
+          element.checked = Boolean(value);
+        } else if (element.matches('[contenteditable="true"]')) {
+          element.innerHTML = value || "";
+        } else {
+          element.value = value || "";
+        }
+      }
+
+      function collectData() {
+        const data = {};
+        fieldElements().forEach((element) => {
+          data[element.dataset.field] = readField(element);
+        });
+        return data;
+      }
+
+      function applyData(data) {
+        fieldElements().forEach((element) => {
+          if (Object.prototype.hasOwnProperty.call(data, element.dataset.field)) {
+            writeField(element, data[element.dataset.field]);
+          }
+        });
+      }
+
+      function setSaveStatus(message) {
+        document.getElementById("saveStatus").textContent = message;
+      }
+
+      function normalisePhrase(value) {
+        return String(value || "").trim().replace(/^["“”'‘’]+|["“”'‘’。！!，,；;：:]+$/g, "");
+      }
+
+      function checkFormat(prefix, optional) {
+        const phraseElement = document.getElementById(prefix + "Phrase");
+        const messageElement = document.getElementById(prefix + "FormatMessage");
+        const phrase = normalisePhrase(phraseElement.value);
+
+        if (!phrase && optional) {
+          messageElement.className = "format-message message-neutral";
+          messageElement.textContent = "未填写，本候选不参与评审。";
+          return { pass: true, empty: true, reason: "未填写" };
+        }
+
+        if (!phrase) {
+          messageElement.className = "format-message message-fail";
+          messageElement.textContent = "未填写候选差异化价值，格式门不通过。";
+          return { pass: false, empty: true, reason: "未填写候选" };
+        }
+
+        if (!phrase.startsWith("更")) {
+          messageElement.className = "format-message message-fail";
+          messageElement.textContent = "格式门不通过：正式差异化价值必须以“更”开头。";
+          return { pass: false, empty: false, reason: "不是“更XX”句式" };
+        }
+
+        if (phrase.length < 2) {
+          messageElement.className = "format-message message-fail";
+          messageElement.textContent = "格式门不通过：“更”后面还没有利益短语。";
+          return { pass: false, empty: false, reason: "缺少利益短语" };
+        }
+
+        messageElement.className = "format-message message-pass";
+        messageElement.textContent = "格式门通过：已经是“更XX”句式。即使表达很短或很宽，也必须继续通过五项实质门。";
+        return { pass: true, empty: false, reason: "格式通过" };
+      }
+
+      const genericPrefixes = ["更优质", "更健康", "更好吃", "更安全", "更天然", "更营养"];
+
+      function isGenericPhrase(phrase) {
+        return genericPrefixes.some((prefix) => phrase.startsWith(prefix));
+      }
+
+      function getGenericReview(prefix) {
+        const fields = ["Definition", "Comparison", "Source", "Review"];
+        const values = {};
+        fields.forEach((suffix) => {
+          const element = document.querySelector('[data-field="' + prefix + "Generic" + suffix + '"]');
+          values[suffix] = element ? readField(element) : "";
+        });
+        return values;
+      }
+
+      function checkGeneric(prefix, optional) {
+        const phraseElement = document.getElementById(prefix + "Phrase");
+        const messageElement = document.getElementById(prefix + "GenericMessage");
+        const phrase = normalisePhrase(phraseElement.value);
+        if (!phrase || (optional && !phrase)) {
+          messageElement.className = "format-message message-neutral";
+          messageElement.textContent = "未触发泛化候选专项门。";
+          return { required: false, pass: true, missing: [] };
+        }
+        if (!isGenericPhrase(phrase)) {
+          messageElement.className = "format-message message-neutral";
+          messageElement.textContent = "未触发泛化候选专项门；仍须通过五项实质门。";
+          return { required: false, pass: true, missing: [] };
+        }
+
+        const values = getGenericReview(prefix);
+        const missing = [];
+        if (!hasText(values.Definition)) missing.push("具体定义");
+        if (!hasText(values.Comparison)) missing.push("比较条件");
+        if (!hasText(values.Source)) missing.push("可回读来源");
+        if (String(values.Review || "").trim() !== "已确认") missing.push("评审人确认");
+        if (missing.length) {
+          messageElement.className = "format-message message-fail";
+          messageElement.textContent = "警示：该泛化候选必须补齐具体定义、比较条件、可回读来源并由评审人确认；缺任一项不得通过。这是内部方法门，不是违法判定。";
+          return { required: true, pass: false, missing };
+        }
+        messageElement.className = "format-message message-pass";
+        messageElement.textContent = "泛化候选专项门通过：具体定义、比较条件、可回读来源与评审人确认均已填写。";
+        return { required: true, pass: true, missing: [] };
+      }
+
+      function getGateValues(prefix) {
+        const names = ["Opponent", "User", "Choice", "Rtb", "Durable"];
+        return names.map((name) => {
+          const element = document.querySelector('[data-field="' + prefix + "Gate" + name + '"]');
+          return element ? element.value : "";
+        });
+      }
+
+      function plainText(value) {
+        return String(value || "")
+          .replace(/<[^>]*>/g, "")
+          .replace(/&nbsp;/g, " ")
+          .trim();
+      }
+
+      function hasText(value) {
+        return plainText(value).length > 0;
+      }
+
+      function getSupportingEvidence(prefix) {
+        if (prefix === "core") {
+          const coreFieldGroups = [
+            ["coreOpponent", "coreOpponentDimension", "coreOpponentEvidence"],
+            ["coreUserScene", "coreUserEvidence", "coreUserCounter"],
+            ["coreChoiceTarget", "coreChoiceEvidence", "coreChoicePlan"],
+            ["coreProductEvidence", "coreExperienceEvidence", "coreEndorsementEvidence"],
+            ["coreWindow", "coreSystem", "coreCopyRisk"]
+          ];
+          return coreFieldGroups.map((fieldNames) => fieldNames.some((fieldName) => {
+            const element = document.querySelector('[data-field="' + fieldName + '"]');
+            return element && hasText(readField(element));
+          }));
+        }
+
+        const auxFields = [
+          "auxOpponentEvidence",
+          "auxUserEvidence",
+          "auxChoiceEvidence",
+          "auxRtbEvidence",
+          "auxDurableEvidence"
+        ];
+        return auxFields.map((fieldName) => {
+          const element = document.querySelector('[data-field="' + fieldName + '"]');
+          return element && hasText(readField(element));
+        });
+      }
+
+      function hasCapabilityPlan(prefix) {
+        const fieldName = prefix === "core" ? "coreCapabilityGap" : "auxCapabilityGap";
+        const element = document.querySelector('[data-field="' + fieldName + '"]');
+        return Boolean(element && hasText(readField(element)));
+      }
+
+      function hasCompleteMappingRow() {
+        const fields = ["sourceFact", "userBenefit", "comparison", "candidateSource", "mappingSource"];
+        for (let index = 1; index <= 3; index += 1) {
+          const values = fields.map((fieldName) => getFieldValue(fieldName + index));
+          if (values.every(hasText) && normalisePhrase(plainText(values[3])).startsWith("更")) return true;
+        }
+        return false;
+      }
+
+      function classifyCandidate(prefix, optional) {
+        const resultElement = document.getElementById(prefix + "Result");
+        const evidenceStateElement = document.getElementById(prefix + "EvidenceState");
+        const roleElement = document.getElementById(prefix + "Role");
+        const evidenceState = evidenceStateElement.value;
+        const role = roleElement.value;
+
+        if (optional && evidenceState === "淘汰") {
+          const messageElement = document.getElementById(prefix + "FormatMessage");
+          messageElement.className = "format-message message-neutral";
+          messageElement.textContent = "本候选已淘汰，不再检查句式、角色和实质门。";
+          renderResult(resultElement, "neutral", "淘汰未采用", "本辅助候选已退出最终方案，不进入品牌屋主图，也不参与总体状态汇总。");
+          return { status: "excluded", label: "淘汰未采用", issues: [] };
+        }
+
+        if (!optional && evidenceState === "淘汰") {
+          renderResult(resultElement, "fail", "核心候选已淘汰", "品牌屋不能没有核心主价值。请更换核心候选后重新评审。");
+          return { status: "fail", label: "核心候选已淘汰", issues: ["核心候选已淘汰"] };
+        }
+
+        const format = checkFormat(prefix, optional);
+        const gates = getGateValues(prefix);
+        const gateLabels = ["对手明确", "用户重要", "影响选择", "RTB成立", "相对持续"];
+        const supportingEvidence = getSupportingEvidence(prefix);
+        const capabilityPlan = hasCapabilityPlan(prefix);
+
+        if (format.empty && optional) {
+          renderResult(resultElement, "neutral", "未启用辅助候选", "辅助价值留空，不参与总体结论。");
+          return { status: "empty", label: "未启用", issues: [] };
+        }
+
+        if (!format.pass) {
+          renderResult(resultElement, "fail", "退回：格式门不通过", format.reason + "。请先改写成“更XX”，再评五项实质门。");
+          return { status: "fail", label: "退回", issues: [format.reason] };
+        }
+
+        const generic = checkGeneric(prefix, optional);
+
+        const missing = [];
+        const failed = [];
+        const pending = [];
+        let building = false;
+
+        gates.forEach((value, index) => {
+          if (!value) missing.push(gateLabels[index]);
+          if (index !== 3 && value && !supportingEvidence[index]) {
+            missing.push(gateLabels[index] + "依据");
+          }
+          if (index === 3 && value) {
+            const requiresCurrentRtb = value === "通过" || evidenceState === "已验证";
+            const mayUsePlan = value === "待验证" || value === "待建设";
+            if (requiresCurrentRtb && !supportingEvidence[index]) {
+              missing.push("RTB现有证据");
+            } else if (mayUsePlan && !supportingEvidence[index] && !capabilityPlan) {
+              missing.push("RTB现有证据或待补任务");
+            }
+          }
+          if (value === "不通过") failed.push(gateLabels[index]);
+          if (value === "待验证") pending.push(gateLabels[index]);
+          if (value === "待建设") {
+            pending.push(gateLabels[index]);
+            building = true;
+          }
+        });
+
+        if (!evidenceState) missing.push("证据状态");
+        if (generic.required && !generic.pass) {
+          generic.missing.forEach((label) => missing.push("泛化候选的" + label));
+        }
+
+        if (failed.length) {
+          renderResult(resultElement, "fail", "不通过", "以下实质门未通过：" + failed.join("、") + "。不得用其他门的优势抵消。");
+          return { status: "fail", label: "不通过", issues: failed };
+        }
+
+        if (missing.length) {
+          renderResult(resultElement, "fail", "退回补充", "以下必填判断尚未完成：" + missing.join("、") + "。");
+          return { status: "fail", label: "退回补充", issues: missing };
+        }
+
+        if (role === "待排序") {
+          renderResult(resultElement, "fail", "退回：待排序", "五项门禁已有结论，但仍未确定核心／辅助角色。正式提交前必须完成主次取舍。");
+          return { status: "fail", label: "退回：待排序", issues: ["主次未定"] };
+        }
+
+        if (evidenceState === "待建设" || building) {
+          renderResult(resultElement, "building", "目标状态待建设", "句式与逻辑可继续保留，但需要新增能力或证据。可标记后进入目标状态主图，不得作为当前事实或直接对外宣称。");
+          return { status: "building", label: "目标状态待建设", issues: pending };
+        }
+
+        if (evidenceState === "待验证" || pending.length) {
+          renderResult(resultElement, "pending", "目标状态待验证", "候选逻辑尚需验证：" + (pending.length ? pending.join("、") : "证据或用户感知") + "。可标记后进入目标状态主图。");
+          return { status: "pending", label: "目标状态待验证", issues: pending };
+        }
+
+        if (evidenceState === "已验证" && gates.every((value) => value === "通过")) {
+          renderResult(resultElement, "pass", "通过", "格式门与五项实质门全部通过，证据状态为已验证。仍需确认对外声称的法规与引证边界。");
+          return { status: "pass", label: "通过", issues: [] };
+        }
+
+        renderResult(resultElement, "fail", "退回检查", "当前字段组合不完整或相互矛盾，请复核五项门禁和证据状态。");
+        return { status: "fail", label: "退回检查", issues: ["字段组合矛盾"] };
+      }
+
+      function renderResult(element, status, title, detail) {
+        element.className = "result-box " + status;
+        element.innerHTML = '<div class="result-title">' + escapeHtml(title) + '</div><div class="result-detail">' + escapeHtml(detail) + "</div>";
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function getFieldValue(fieldName) {
+        const element = document.querySelector('[data-field="' + fieldName + '"]');
+        return element ? readField(element) : "";
+      }
+
+      function expectedDeliveryForStatus(status) {
+        if (status === "pass") {
+          return {
+            overallState: "已验证",
+            decision: "正式采用，进入品牌屋主图"
+          };
+        }
+        if (status === "pending") {
+          return {
+            overallState: "待验证",
+            decision: "目标状态待验证，标记后进入主图"
+          };
+        }
+        if (status === "building") {
+          return {
+            overallState: "待建设",
+            decision: "目标状态待建设，标记后进入主图"
+          };
+        }
+        return null;
+      }
+
+      function validateFinalDelivery(coreStatus, core, aux) {
+        const issues = [];
+        const retainedStatuses = ["pass", "pending", "building"];
+        const coreRetained = retainedStatuses.includes(core.status);
+        const auxRetained = retainedStatuses.includes(aux.status);
+        const requiredFields = [
+          ["brand", "品牌名称"],
+          ["cycle", "战略周期／版本"],
+          ["category", "品类定位"],
+          ["audience", "核心客群"],
+          ["scene", "核心消费场景"],
+          ["finalCore", "最终核心主价值"],
+          ["overallState", "本轮辅助判断（非正式裁决）"],
+          ["decision", "方案处理建议（辅助判断，非正式裁决）"],
+          ["formalNature", "正式内容性质"],
+          ["formalEvidence", "正式证据状态"],
+          ["formalAbility", "正式能力状态"],
+          ["formalDecision", "正式裁决"]
+        ];
+
+        requiredFields.forEach(([fieldName, label]) => {
+          if (!hasText(getFieldValue(fieldName))) issues.push(label);
+        });
+
+        const formalEvidence = getFieldValue("formalEvidence");
+        const formalAbility = getFieldValue("formalAbility");
+        const formalDecision = getFieldValue("formalDecision");
+        if ((formalEvidence === "待验证" || formalAbility === "待建设") && formalDecision === "保留") {
+          issues.push("正式证据待验证或能力待建设时，正式裁决不得为‘保留’");
+        }
+
+        if (!hasCompleteMappingRow()) {
+          issues.push("至少一行完整的事实→用户利益→比较对象→“更XX”候选→可回读来源映射");
+        }
+
+        if (coreRetained && !hasText(getFieldValue("coreUsageBoundary"))) {
+          issues.push("核心使用边界");
+        }
+
+        const corePhrase = normalisePhrase(document.getElementById("corePhrase").value);
+        const finalCore = normalisePhrase(getFieldValue("finalCore"));
+        if (finalCore && corePhrase && finalCore !== corePhrase) {
+          issues.push("最终核心主价值必须与核心候选一致");
+        }
+
+        const auxPhrase = normalisePhrase(document.getElementById("auxPhrase").value);
+        const finalAux = normalisePhrase(getFieldValue("finalAux"));
+        if ((aux.status === "empty" || aux.status === "excluded") && finalAux) {
+          issues.push(aux.status === "excluded" ? "已淘汰的辅助候选不得写入最终辅助价值" : "未启用辅助候选时最终辅助价值必须留空");
+        } else if (auxRetained && !finalAux) {
+          issues.push("保留辅助候选时必须填写最终辅助价值");
+        } else if (auxRetained && finalAux !== auxPhrase) {
+          issues.push("最终辅助价值必须与保留的辅助候选一致");
+        }
+
+        if (auxRetained && !hasText(getFieldValue("auxSupportRelation"))) {
+          issues.push("辅助支持核心关系");
+        }
+
+        if (auxRetained) {
+          const auxStatusPlanFields = [
+            ["currentFactFinal2", "辅助当前事实"],
+            ["targetStateFinal2", "辅助目标状态"],
+            ["gapFinal2", "辅助能力／证据缺口"],
+            ["gapOwnerFinal2", "辅助责任人"],
+            ["verificationFinal2", "辅助验证方式与截止时间"]
+          ];
+          auxStatusPlanFields.forEach(([fieldName, label]) => {
+            if (!hasText(getFieldValue(fieldName))) issues.push(label);
+          });
+        }
+
+        const expected = expectedDeliveryForStatus(coreStatus);
+        if (expected) {
+          const overallState = getFieldValue("overallState");
+          const decision = getFieldValue("decision");
+          if (overallState && overallState !== expected.overallState) {
+            issues.push("本轮辅助判断（非正式裁决）应为“" + expected.overallState + "”");
+          }
+          if (decision && decision !== expected.decision) {
+            issues.push("方案处理建议（辅助判断，非正式裁决）应为“" + expected.decision + "”");
+          }
+        }
+
+        if (coreStatus === "pending" || coreStatus === "building") {
+          if ((core.status === "pending" || core.status === "building") && !hasCapabilityPlan("core")) {
+            issues.push("核心候选的待补证据／能力建设任务");
+          }
+          if ((aux.status === "pending" || aux.status === "building") && !hasCapabilityPlan("aux")) {
+            issues.push("辅助候选的待补证据／能力建设任务");
+          }
+
+          const statusPlanFields = [
+            ["currentFactFinal", "当前事实"],
+            ["targetStateFinal", "目标状态"],
+            ["gapFinal", "能力／证据缺口"],
+            ["gapOwnerFinal", "责任人"],
+            ["verificationFinal", "验证方式与截止时间"],
+            ["nextAction", "下一步动作、责任人与日期"]
+          ];
+          statusPlanFields.forEach(([fieldName, label]) => {
+            if (!hasText(getFieldValue(fieldName))) issues.push(label);
+          });
+        }
+
+        const checklistFields = [
+          "checkOneBrand",
+          "checkOneCore",
+          "checkFactValue",
+          "checkStatus",
+          "checkBoundary",
+          "checkExternal"
+        ];
+        const checkedCount = checklistFields.filter((fieldName) => Boolean(getFieldValue(fieldName))).length;
+        if (checkedCount !== checklistFields.length) {
+          issues.push("6项提交前勾选（当前完成" + checkedCount + "项）");
+        }
+
+        return issues;
+      }
+
+      function weakestRetainedStatus(core, aux) {
+        if (core.status === "fail") return "fail";
+        if (aux.status === "fail") return "aux-fail";
+
+        const retainedStatuses = [core.status];
+        if (aux.status !== "empty" && aux.status !== "excluded") retainedStatuses.push(aux.status);
+        if (retainedStatuses.includes("building")) return "building";
+        if (retainedStatuses.includes("pending")) return "pending";
+        if (retainedStatuses.every((status) => status === "pass")) return "pass";
+        return "fail";
+      }
+
+      function candidateSummary(aux) {
+        if (aux.status === "empty") return "未启用辅助候选。";
+        if (aux.status === "excluded") return "辅助候选已淘汰未采用，不参与总体状态。";
+        return "辅助候选结果：" + aux.label + "。";
+      }
+
+      window.evaluateAll = function () {
+        const core = classifyCandidate("core", false);
+        const aux = classifyCandidate("aux", true);
+        const overall = document.getElementById("overallResult");
+        const coreRole = document.getElementById("coreRole").value;
+        const auxPhrase = normalisePhrase(document.getElementById("auxPhrase").value);
+        const auxRole = document.getElementById("auxRole").value;
+        let automaticStatus = "fail";
+        let automaticTitle = "总体不通过（辅助判断，非正式裁决）";
+        let automaticDetail = "核心主价值未通过。辅助价值不能替代核心价值，需先修复或更换核心候选。";
+
+        if (coreRole !== "核心主价值") {
+          automaticTitle = "总体退回：核心角色错误";
+          automaticDetail = "候选A必须明确为“核心主价值”。品牌屋主图不能没有核心价值。";
+        } else if (aux.status !== "empty" && aux.status !== "excluded" && auxPhrase && auxRole === "核心主价值") {
+          automaticTitle = "总体退回：出现两条核心价值";
+          automaticDetail = "候选A与候选B都被标为核心主价值。请只保留一条核心；若淘汰候选B，请同时把它的角色改回辅助价值。";
+        } else {
+          automaticStatus = weakestRetainedStatus(core, aux);
+          const auxNote = candidateSummary(aux);
+          if (automaticStatus === "aux-fail") {
+            automaticStatus = "fail";
+            automaticTitle = "总体退回：辅助价值未通过";
+            automaticDetail = "已填写且保留的辅助价值必须通过相同门禁。请修复、标记为淘汰退出方案，或清空该候选。";
+          } else if (automaticStatus === "pass") {
+            automaticTitle = "总体通过（辅助判断，非正式裁决）";
+            automaticDetail = "全部保留候选均通过硬门禁。" + auxNote + "对外使用前仍需另行完成食品与广告声称核查。";
+          } else if (automaticStatus === "pending") {
+            automaticTitle = "总体辅助判断（非正式裁决）：目标状态待验证";
+            automaticDetail = "全部保留候选中的最弱有效状态为待验证。" + auxNote + "必须在主图显著标注并按计划补验证。";
+          } else if (automaticStatus === "building") {
+            automaticTitle = "总体辅助判断（非正式裁决）：目标状态待建设";
+            automaticDetail = "全部保留候选中的最弱有效状态为待建设。" + auxNote + "不得作为当前事实或直接对外宣称。";
+          }
+        }
+
+        const deliveryIssues = validateFinalDelivery(automaticStatus, core, aux);
+        if (automaticStatus !== "fail" && deliveryIssues.length) {
+          renderResult(overall, "fail", "总体退回：补齐交付", "候选门禁结论为“" + automaticTitle + "”，但正式总体结论仍缺：\n- " + deliveryIssues.join("\n- "));
+        } else {
+          renderResult(overall, automaticStatus, automaticTitle, automaticDetail);
+        }
+
+        setSaveStatus("门禁检查完成：" + new Date().toLocaleString("zh-CN"));
+        saveDraft(false);
+      };
+
+      window.saveDraft = function (showMessage) {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(collectData()));
+          if (showMessage !== false) setSaveStatus("已保存到本机浏览器：" + new Date().toLocaleString("zh-CN"));
+        } catch (error) {
+          setSaveStatus("保存失败：浏览器可能禁止本地存储。请改用导出 JSON。");
+        }
+      };
+
+      window.exportDraft = function () {
+        const data = {
+          tool: "09-更XX差异化价值筛选表",
+          exportedAt: new Date().toISOString(),
+          values: collectData()
+        };
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        const brand = String(data.values.brand || "未命名品牌").replace(/[\\/:*?"<>|]/g, "-");
+        link.href = url;
+        link.download = brand + "-更XX差异化价值筛选表.json";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+        setSaveStatus("JSON 已导出，请妥善归档。");
+      };
+
+      importFile.addEventListener("change", function (event) {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function () {
+          try {
+            const parsed = JSON.parse(String(reader.result || "{}"));
+            const values = parsed.values || parsed;
+            applyData(values);
+            evaluateAll();
+            saveDraft(false);
+            setSaveStatus("JSON 已导入并重新检查门禁。");
+          } catch (error) {
+            alert("无法导入：文件不是有效的本工具 JSON。");
+          } finally {
+            importFile.value = "";
+          }
+        };
+        reader.readAsText(file, "utf-8");
+      });
+
+      window.clearDraft = function () {
+        if (!confirm("确定清空本表并删除本机草稿吗？此操作无法恢复。")) return;
+        fieldElements().forEach((element) => writeField(element, element.type === "checkbox" ? false : ""));
+        document.getElementById("coreRole").value = "核心主价值";
+        document.getElementById("auxRole").value = "辅助价值";
+        localStorage.removeItem(storageKey);
+        checkFormat("core", false);
+        checkFormat("aux", true);
+        checkGeneric("core", false);
+        checkGeneric("aux", true);
+        renderResult(document.getElementById("coreResult"), "neutral", "核心候选尚未检查", "填写“更XX”、五项门禁与证据状态后，点击页面上方“检查全部门禁”。");
+        renderResult(document.getElementById("auxResult"), "neutral", "辅助候选尚未检查", "辅助价值可留空；填写后独立过门。标为淘汰后退出方案，不参与总体状态。");
+        renderResult(document.getElementById("overallResult"), "neutral", "尚未生成总体辅助判断（非正式裁决）", "先取全部保留候选的最弱有效状态，再检查项目前提、最终交付、方案处理建议与六项勾选是否完整。");
+        setSaveStatus("已清空本表和本机草稿。");
+      };
+
+      document.getElementById("corePhrase").addEventListener("input", function () {
+        checkFormat("core", false);
+        checkGeneric("core", false);
+      });
+      document.getElementById("auxPhrase").addEventListener("input", function () {
+        checkFormat("aux", true);
+        checkGeneric("aux", true);
+      });
+
+      fieldElements().forEach((element) => {
+        const eventName = element.matches('[contenteditable="true"]') || element.tagName === "TEXTAREA" || element.tagName === "INPUT" ? "input" : "change";
+        element.addEventListener(eventName, function () {
+          setSaveStatus("内容已修改，尚未保存或重新检查。");
+        });
+      });
+
+      try {
+        const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+        applyData(saved);
+        if (Object.keys(saved).length) {
+          setSaveStatus("已载入本机草稿。请重新检查全部门禁。");
+        }
+      } catch (error) {
+        setSaveStatus("本机草稿不可读，已保持空白表。");
+      }
+
+      checkFormat("core", false);
+      checkFormat("aux", true);
+      checkGeneric("core", false);
+      checkGeneric("aux", true);
+    }());
+  </script>
+</body>
+</html>

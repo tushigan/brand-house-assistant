@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>工具07｜用户心智与品类语言地图</title><link rel="stylesheet" href="工具模板样式.css">
+</head>
+<body data-tool-id="07-category-language-map"><main class="tool-sheet">
+  <div class="tool-kicker">工具07 · 对应第7章</div><h1>用户心智与品类语言地图</h1>
+  <p class="tool-subtitle">把用户原话、企业术语、法规名称和策略候选分开，再裁决一个主要品类入口。</p>
+  <div class="confidential">公司内部资料，请勿外传。用户原话、搜索数据和渠道材料应脱敏并注明范围；本表结论不自动成为包装或标签名称。</div>
+  <div class="tool-toolbar"><button type="button" data-action="save">保存本机草稿</button><button type="button" class="secondary" data-action="print">打印/存为PDF</button><button type="button" class="danger" data-action="reset">清空当前工具</button><span class="save-status" data-save-status></span></div>
+  <section class="instruction"><strong>使用方法：</strong>先逐条录入原话，不改写；再归并候选并做无提示理解测试。没有用户来源或只有企业自创词时，最终状态只能是“策略假设/待验证”。</section>
+
+  <h2>一、项目范围</h2><div class="grid three">
+    <div class="field"><label class="required">独立品牌</label><input name="brand"></div><div class="field"><label>战略周期/版本</label><input name="cycle"></div><div class="field"><label>主要市场/渠道</label><input name="market"></div>
+    <div class="field"><label>研究负责人</label><input name="researchOwner"></div><div class="field"><label>裁决人</label><input name="approver"></div><div class="field"><label>复核日期</label><input type="date" name="reviewDate"></div>
+    <div class="field full"><label>本轮产品与业务边界</label><textarea name="scope"></textarea></div>
+  </div>
+
+  <h2>二、语言证据采集</h2><div class="table-wrap"><table><thead><tr><th>原词/原话</th><th>说话者与场景</th><th>来源及可回读位置</th><th>用户想完成的任务</th><th>比较对象</th><th>材料类型（辅助判断，非正式证据状态）</th></tr></thead><tbody>
+    <tr><td><textarea name="term1"></textarea></td><td><textarea name="speaker1"></textarea></td><td><textarea name="source1"></textarea></td><td><textarea name="task1"></textarea></td><td><textarea name="compare1"></textarea></td><td><select name="state1"><option>待核查</option><option>用户原话</option><option>行为证据</option><option>企业自述</option><option>策略假设</option></select></td></tr>
+    <tr><td><textarea name="term2"></textarea></td><td><textarea name="speaker2"></textarea></td><td><textarea name="source2"></textarea></td><td><textarea name="task2"></textarea></td><td><textarea name="compare2"></textarea></td><td><select name="state2"><option>待核查</option><option>用户原话</option><option>行为证据</option><option>企业自述</option><option>策略假设</option></select></td></tr>
+    <tr><td><textarea name="term3"></textarea></td><td><textarea name="speaker3"></textarea></td><td><textarea name="source3"></textarea></td><td><textarea name="task3"></textarea></td><td><textarea name="compare3"></textarea></td><td><select name="state3"><option>待核查</option><option>用户原话</option><option>行为证据</option><option>企业自述</option><option>策略假设</option></select></td></tr>
+    <tr><td><textarea name="term4"></textarea></td><td><textarea name="speaker4"></textarea></td><td><textarea name="source4"></textarea></td><td><textarea name="task4"></textarea></td><td><textarea name="compare4"></textarea></td><td><select name="state4"><option>待核查</option><option>用户原话</option><option>行为证据</option><option>企业自述</option><option>策略假设</option></select></td></tr>
+  </tbody></table></div>
+
+  <h2>三、候选归并与无提示理解测试</h2><div class="table-wrap"><table><thead><tr><th>候选品类词</th><th>类型</th><th>用户认为它是什么/何时需要</th><th>会与什么比较</th><th>理解偏差</th><th>候选用途（辅助判断，非正式裁决）</th></tr></thead><tbody>
+    <tr><td><textarea name="candidate1"></textarea></td><td><select name="type1"><option>待判断</option><option>上位品类</option><option>日常品类</option><option>场景品类</option><option>企业自创词</option><option>法定/标准名称</option></select></td><td><textarea name="understand1"></textarea></td><td><textarea name="set1"></textarea></td><td><textarea name="gap1"></textarea></td><td><select name="decision1"><option>待裁决</option><option>主要品类</option><option>上位入口</option><option>渠道适配词</option><option>待验证</option><option>淘汰</option></select></td></tr>
+    <tr><td><textarea name="candidate2"></textarea></td><td><select name="type2"><option>待判断</option><option>上位品类</option><option>日常品类</option><option>场景品类</option><option>企业自创词</option><option>法定/标准名称</option></select></td><td><textarea name="understand2"></textarea></td><td><textarea name="set2"></textarea></td><td><textarea name="gap2"></textarea></td><td><select name="decision2"><option>待裁决</option><option>主要品类</option><option>上位入口</option><option>渠道适配词</option><option>待验证</option><option>淘汰</option></select></td></tr>
+    <tr><td><textarea name="candidate3"></textarea></td><td><select name="type3"><option>待判断</option><option>上位品类</option><option>日常品类</option><option>场景品类</option><option>企业自创词</option><option>法定/标准名称</option></select></td><td><textarea name="understand3"></textarea></td><td><textarea name="set3"></textarea></td><td><textarea name="gap3"></textarea></td><td><select name="decision3"><option>待裁决</option><option>主要品类</option><option>上位入口</option><option>渠道适配词</option><option>待验证</option><option>淘汰</option></select></td></tr>
+  </tbody></table></div>
+
+  <h2>四、三角适配与合规检查</h2><div class="check-list">
+    <label class="check-item"><input type="checkbox" name="userUnderstands"><span>目标用户无需长篇解释就能大致归类</span></label><label class="check-item"><input type="checkbox" name="realCompare"><span>比较集合与真实选择现场一致</span></label>
+    <label class="check-item"><input type="checkbox" name="audienceFit"><span>能容纳本轮核心客群与场景</span></label><label class="check-item"><input type="checkbox" name="valueFit"><span>能给核心“更XX”形成清楚参照</span></label>
+    <label class="check-item"><input type="checkbox" name="businessFit"><span>能容纳本战略周期的产品边界</span></label><label class="check-item"><input type="checkbox" name="compliance"><span>未用未证实营养/健康/功能承诺冒充品类</span></label>
+  </div>
+
+  <h2>五、正式输出与验证计划</h2><div class="grid">
+    <div class="field"><label>主要品类定位</label><textarea name="finalCategory"></textarea></div><div class="field"><label>上位品类入口（如需要）</label><textarea name="parentCategory"></textarea></div>
+    <div class="field"><label>内容性质</label><select name="finalState"><option>当前事实</option><option>策略假设</option></select></div><div class="field"><label>证据状态</label><select name="finalEvidence"><option>已证实</option><option>待验证</option></select></div><div class="field"><label>能力状态</label><select name="finalAbility"><option>已具备</option><option>待建设</option></select></div><div class="field"><label>正式裁决</label><select name="finalDecision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></div><div class="field"><label>适用场景与边界</label><textarea name="boundary"></textarea></div>
+    <div class="field"><label>淘汰词及原因</label><textarea name="rejected"></textarea></div><div class="field"><label>待验证问题与方法</label><textarea name="validation"></textarea></div>
+    <div class="field"><label>责任人、期限与重审触发</label><textarea name="ownerDeadline"></textarea></div><div class="field"><label>最终裁决理由</label><textarea name="reason"></textarea></div>
+  </div>
+  <footer class="tool-footer">正文入口：第7章“用户语言中的品类定位”。品类定位不是包装法定名称；对外使用前另行核对标签与广告要求。</footer>
+</main><script src="工具模板脚本.js"></script></body></html>

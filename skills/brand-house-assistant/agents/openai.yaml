@@ -1,0 +1,4 @@
+interface:
+  display_name: "品牌屋助手"
+  short_description: "共创、构建、启发、带教、审查、落地并版本重审快消食品品牌屋"
+  default_prompt: "使用 $brand-house-assistant，先判断本轮是构建、共创、启发、带教、审查、执行还是重审，再按需读取方法依据，并按内容性质、证据状态、能力状态、裁决状态四维分别记录。"

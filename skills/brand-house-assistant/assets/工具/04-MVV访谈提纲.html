@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>工具04｜MVV访谈提纲</title>
+  <link rel="stylesheet" href="工具模板样式.css">
+</head>
+<body data-tool-id="04-mvv-interview">
+  <main class="tool-sheet">
+    <div class="tool-kicker">工具04 · 对应第4章</div>
+    <h1>MVV访谈提纲</h1>
+    <p class="tool-subtitle">从真实事件、冲突和取舍中寻找品牌愿景、使命与价值观证据。</p>
+    <div class="confidential">公司内部资料，请勿外传。访谈原话、姓名和敏感经营信息按授权分级；正式书稿与提案只保留完成判断所需的最小事实。</div>
+    <div class="tool-toolbar">
+      <button type="button" data-action="save">保存本机草稿</button>
+      <button type="button" class="secondary" data-action="print">打印/存为PDF</button>
+      <button type="button" class="danger" data-action="reset">清空当前工具</button>
+      <span class="save-status" data-save-status></span>
+    </div>
+
+    <section class="instruction"><strong>使用方法：</strong>主持人按事件追问，不要求受访者现场写金句。记录员把“原话、事实、解释、待核查”分开；会后由受访者核对事实，再由项目组作方法判断。</section>
+
+    <h2>一、访谈前提</h2>
+    <div class="grid three">
+      <div class="field"><label class="required">独立品牌</label><input name="brand" data-field="brand"></div>
+      <div class="field"><label>项目阶段</label><select name="stage" data-field="stage"><option value="">请选择</option><option>0到1</option><option>竞争期</option><option>成熟品牌</option></select></div>
+      <div class="field"><label>战略周期/版本</label><input name="cycle" data-field="cycle"></div>
+      <div class="field"><label>受访者角色</label><input name="intervieweeRole" data-field="intervieweeRole" placeholder="创始人/老员工/产品/质量/用户等"></div>
+      <div class="field"><label>主持人</label><input name="host" data-field="host"></div>
+      <div class="field"><label>日期</label><input type="date" name="date" data-field="date"></div>
+      <div class="field full"><label>本次访谈能证明什么，不能证明什么</label><textarea name="scope" data-field="scope"></textarea></div>
+    </div>
+
+    <h2>二、创立动机与长期问题</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>问题</th><th>原话/事件</th><th>证据或待核材料</th><th>内容性质</th><th>证据状态</th></tr></thead>
+      <tbody>
+        <tr><td>当初为什么做这个品牌，而不只是做一家食品企业或一款产品？</td><td><textarea name="originAnswer"></textarea></td><td><textarea name="originEvidence"></textarea></td><td><select name="originNature"><option>当前事实</option><option>策略假设</option></select></td><td><select name="originState"><option>已证实</option><option>待验证</option></select></td></tr>
+        <tr><td>希望长期改善哪类人的什么处境？拿掉当前产品后仍成立吗？</td><td><textarea name="problemAnswer"></textarea></td><td><textarea name="problemEvidence"></textarea></td><td><select name="problemNature"><option>当前事实</option><option>策略假设</option></select></td><td><select name="problemState"><option>已证实</option><option>待验证</option></select></td></tr>
+        <tr><td>哪些机会即使赚钱，也不属于这个品牌？</td><td><textarea name="boundaryAnswer"></textarea></td><td><textarea name="boundaryEvidence"></textarea></td><td><select name="boundaryNature"><option>当前事实</option><option>策略假设</option></select></td><td><select name="boundaryState"><option>已证实</option><option>待验证</option></select></td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>三、关键选择与真实代价</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>事件</th><th>当时可选方案</th><th>最终选择及理由</th><th>付出的代价</th><th>可回读来源</th></tr></thead>
+      <tbody>
+        <tr><td><textarea name="event1"></textarea></td><td><textarea name="options1"></textarea></td><td><textarea name="decision1"></textarea></td><td><textarea name="cost1"></textarea></td><td><textarea name="source1"></textarea></td></tr>
+        <tr><td><textarea name="event2"></textarea></td><td><textarea name="options2"></textarea></td><td><textarea name="decision2"></textarea></td><td><textarea name="cost2"></textarea></td><td><textarea name="source2"></textarea></td></tr>
+        <tr><td><textarea name="event3"></textarea></td><td><textarea name="options3"></textarea></td><td><textarea name="decision3"></textarea></td><td><textarea name="cost3"></textarea></td><td><textarea name="source3"></textarea></td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>四、未来图景、存在理由与原则候选</h2>
+    <div class="grid">
+      <div class="field"><label>愿景素材：未来谁的什么处境发生了变化</label><textarea name="visionMaterial"></textarea></div>
+      <div class="field"><label>使命素材：品牌为谁长期解决什么问题</label><textarea name="missionMaterial"></textarea></div>
+      <div class="field"><label>价值观素材：在冲突中按什么原则选择</label><textarea name="valuesMaterial"></textarea></div>
+      <div class="field"><label>行为红线：即使短期获益也绝不做什么</label><textarea name="redlines"></textarea></div>
+      <div class="field full"><label>反例：品牌什么时候没有做到，后来如何处理</label><textarea name="counterExamples"></textarea></div>
+    </div>
+
+    <h2>五、交叉验证与冲突裁决</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>候选判断</th><th>支持证据</th><th>反证/不同说法</th><th>需访谈或取证对象</th><th>责任人和期限</th></tr></thead>
+      <tbody>
+        <tr><td><textarea name="claim1"></textarea></td><td><textarea name="support1"></textarea></td><td><textarea name="against1"></textarea></td><td><textarea name="nextSource1"></textarea></td><td><textarea name="owner1"></textarea></td></tr>
+        <tr><td><textarea name="claim2"></textarea></td><td><textarea name="support2"></textarea></td><td><textarea name="against2"></textarea></td><td><textarea name="nextSource2"></textarea></td><td><textarea name="owner2"></textarea></td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>六、访谈输出</h2>
+    <div class="grid">
+      <div class="field"><label>可作为内部事实的内容</label><textarea name="internalFacts"></textarea></div>
+      <div class="field"><label>仅可作为策略假设的内容</label><textarea name="hypotheses"></textarea></div>
+      <div class="field"><label>待核查资料清单</label><textarea name="evidenceRequests"></textarea></div>
+      <div class="field"><label>敏感信息与脱敏处理</label><textarea name="sensitiveHandling"></textarea></div>
+      <div class="field full"><label>下一次复核安排</label><textarea name="nextReview"></textarea></div>
+    </div>
+
+    <footer class="tool-footer">本工具只帮助取证和生成候选，不替代品牌负责人、事实核查人员和最终裁决人。</footer>
+  </main>
+  <script src="工具模板脚本.js"></script>
+</body>
+</html>

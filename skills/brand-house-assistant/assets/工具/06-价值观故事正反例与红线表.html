@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>工具06｜价值观故事正反例与红线表</title>
+  <link rel="stylesheet" href="工具模板样式.css">
+</head>
+<body data-tool-id="06-values-stories-redlines">
+  <main class="tool-sheet">
+    <div class="tool-kicker">工具06 · 对应第6章</div>
+    <h1>价值观故事正反例与红线表</h1>
+    <p class="tool-subtitle">把价值观候选放进真实冲突中检查，并转成可执行行为。</p>
+    <div class="confidential">公司内部资料，请勿外传。所有事件须脱敏；无授权的姓名、配方、经营数据和供应链信息不得进入书稿或外部提案。</div>
+    <div class="tool-toolbar">
+      <button type="button" data-action="save">保存本机草稿</button>
+      <button type="button" class="secondary" data-action="print">打印/存为PDF</button>
+      <button type="button" class="danger" data-action="reset">清空当前工具</button>
+      <span class="save-status" data-save-status></span>
+    </div>
+    <section class="instruction"><strong>使用方法：</strong>每条候选至少填写一个正例、一个反例和一条红线。只有词语、没有事件和行为时，状态必须保持“待验证”或“淘汰”。</section>
+
+    <h2>一、项目范围</h2>
+    <div class="grid three">
+      <div class="field"><label class="required">独立品牌</label><input name="brand"></div>
+      <div class="field"><label>版本/战略周期</label><input name="cycle"></div>
+      <div class="field"><label>评审日期</label><input type="date" name="reviewDate"></div>
+      <div class="field"><label>品牌负责人</label><input name="brandOwner"></div>
+      <div class="field"><label>跨部门评审人</label><input name="reviewers" placeholder="产品、质量、销售、运营等"></div>
+      <div class="field"><label>最终确认人</label><input name="approver"></div>
+    </div>
+
+    <h2>二、价值观候选1</h2>
+    <div class="grid">
+      <div class="field"><label>候选名称</label><input name="value1Name"></div>
+      <div class="field"><label>内容性质</label><select name="value1Nature"><option>当前事实</option><option>策略假设</option></select></div><div class="field"><label>证据状态</label><select name="value1State"><option>已证实</option><option>待验证</option></select></div><div class="field"><label>能力状态</label><select name="value1Ability"><option>已具备</option><option>待建设</option></select></div><div class="field"><label>裁决状态</label><select name="value1Decision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></div>
+      <div class="field full"><label>原则解释：遇到什么冲突时如何排序</label><textarea name="value1Meaning"></textarea></div>
+      <div class="field"><label>正例：事件、选择、代价、结果</label><textarea name="value1Positive"></textarea></div>
+      <div class="field"><label>正例可回读来源</label><textarea name="value1PositiveSource"></textarea></div>
+      <div class="field"><label>反例：何时没有做到</label><textarea name="value1Negative"></textarea></div>
+      <div class="field"><label>反例后的纠正与当前状态</label><textarea name="value1Correction"></textarea></div>
+      <div class="field"><label>推荐行为</label><textarea name="value1Behaviors"></textarea></div>
+      <div class="field"><label>行为红线与例外审批</label><textarea name="value1Redlines"></textarea></div>
+    </div>
+
+    <h2>三、价值观候选2</h2>
+    <div class="grid">
+      <div class="field"><label>候选名称</label><input name="value2Name"></div>
+      <div class="field"><label>内容性质</label><select name="value2Nature"><option>当前事实</option><option>策略假设</option></select></div><div class="field"><label>证据状态</label><select name="value2State"><option>已证实</option><option>待验证</option></select></div><div class="field"><label>能力状态</label><select name="value2Ability"><option>已具备</option><option>待建设</option></select></div><div class="field"><label>裁决状态</label><select name="value2Decision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></div>
+      <div class="field full"><label>原则解释：遇到什么冲突时如何排序</label><textarea name="value2Meaning"></textarea></div>
+      <div class="field"><label>正例：事件、选择、代价、结果</label><textarea name="value2Positive"></textarea></div>
+      <div class="field"><label>正例可回读来源</label><textarea name="value2PositiveSource"></textarea></div>
+      <div class="field"><label>反例：何时没有做到</label><textarea name="value2Negative"></textarea></div>
+      <div class="field"><label>反例后的纠正与当前状态</label><textarea name="value2Correction"></textarea></div>
+      <div class="field"><label>推荐行为</label><textarea name="value2Behaviors"></textarea></div>
+      <div class="field"><label>行为红线与例外审批</label><textarea name="value2Redlines"></textarea></div>
+    </div>
+
+    <h2>四、价值观候选3</h2>
+    <div class="grid">
+      <div class="field"><label>候选名称</label><input name="value3Name"></div>
+      <div class="field"><label>内容性质</label><select name="value3Nature"><option>当前事实</option><option>策略假设</option></select></div><div class="field"><label>证据状态</label><select name="value3State"><option>已证实</option><option>待验证</option></select></div><div class="field"><label>能力状态</label><select name="value3Ability"><option>已具备</option><option>待建设</option></select></div><div class="field"><label>裁决状态</label><select name="value3Decision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></div>
+      <div class="field full"><label>原则解释：遇到什么冲突时如何排序</label><textarea name="value3Meaning"></textarea></div>
+      <div class="field"><label>正例：事件、选择、代价、结果</label><textarea name="value3Positive"></textarea></div>
+      <div class="field"><label>正例可回读来源</label><textarea name="value3PositiveSource"></textarea></div>
+      <div class="field"><label>反例：何时没有做到</label><textarea name="value3Negative"></textarea></div>
+      <div class="field"><label>反例后的纠正与当前状态</label><textarea name="value3Correction"></textarea></div>
+      <div class="field"><label>推荐行为</label><textarea name="value3Behaviors"></textarea></div>
+      <div class="field"><label>行为红线与例外审批</label><textarea name="value3Redlines"></textarea></div>
+    </div>
+
+    <h2>五、跨触点转译</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>触点</th><th>必须体现的行为</th><th>禁止行为</th><th>责任人/检查方式</th></tr></thead>
+      <tbody>
+        <tr><td>产品与质量</td><td><textarea name="productMust"></textarea></td><td><textarea name="productMustNot"></textarea></td><td><textarea name="productOwner"></textarea></td></tr>
+        <tr><td>包装与内容</td><td><textarea name="contentMust"></textarea></td><td><textarea name="contentMustNot"></textarea></td><td><textarea name="contentOwner"></textarea></td></tr>
+        <tr><td>渠道与销售</td><td><textarea name="channelMust"></textarea></td><td><textarea name="channelMustNot"></textarea></td><td><textarea name="channelOwner"></textarea></td></tr>
+        <tr><td>服务与组织</td><td><textarea name="serviceMust"></textarea></td><td><textarea name="serviceMustNot"></textarea></td><td><textarea name="serviceOwner"></textarea></td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>六、最终裁决</h2>
+    <div class="grid">
+      <div class="field"><label>正式保留的价值观</label><textarea name="finalValues"></textarea></div>
+      <div class="field"><label>淘汰候选及理由</label><textarea name="rejectedValues"></textarea></div>
+      <div class="field"><label>待补证据/待建设机制</label><textarea name="gaps"></textarea></div>
+      <div class="field"><label>责任人、期限与复核触发条件</label><textarea name="nextReview"></textarea></div>
+    </div>
+
+    <footer class="tool-footer">一条价值观能否保留，不看它是否好听，看它能否解释真实取舍、约束未来行为并接受反例检验。</footer>
+  </main>
+  <script src="工具模板脚本.js"></script>
+</body>
+</html>

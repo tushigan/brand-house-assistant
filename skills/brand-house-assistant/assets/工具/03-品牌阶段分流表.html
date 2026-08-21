@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>工具03｜品牌阶段分流表</title>
+  <link rel="stylesheet" href="工具模板样式.css">
+</head>
+<body data-tool-id="03-品牌阶段分流表">
+  <main class="tool-sheet">
+    <div class="tool-kicker">快消食品品牌屋构建橙皮书 · 工具 03</div>
+    <h1>品牌阶段分流表</h1>
+    <p class="tool-subtitle">Brand Stage Routing Sheet</p>
+    <div class="confidential">公司内部资料，请勿外传。本表只决定本轮取证深度、参与方式和版本出口；不因品牌处于0到1阶段而取消其独立的使命、愿景、价值观或其他品牌屋核心字段。</div>
+    <div class="tool-toolbar">
+      <button type="button" data-action="save">保存本机草稿</button>
+      <button type="button" class="secondary" data-action="print">打印／导出PDF</button>
+      <button type="button" class="danger" data-action="reset">清空当前工具</button>
+      <span class="save-status" data-save-status>尚未填写</span>
+    </div>
+    <div class="instruction">
+      <strong>谁填写：</strong>项目负责人牵头，品牌负责人、策略负责人和资料／研究负责人共同判断；涉及既有资产时补充产品、销售、渠道和组织代表。<br>
+      <strong>何时填写：</strong>工具01完成后、确定调研与共创工作量之前；出现新证据或重大变化时复核。<br>
+      <strong>怎么判：</strong>不能凭品牌成立年份或团队偏好分阶段。每个判断都要写可回读依据；证据混合、风险较高或无法判断时，按取证更深的一档执行。<br>
+      <strong>正文入口：</strong><a href="../fragments/ch03-品牌边界目标状态与版本管理.html#part3">§03 品牌边界、目标状态与版本管理</a>；<a href="../fragments/ch01-品牌屋不是什么.html#part1">§01 品牌屋不是什么</a>。
+    </div>
+
+    <h2>一、分流任务身份</h2>
+    <div class="grid four">
+      <div class="field"><label class="required" for="brandName">独立品牌正式名称</label><input id="brandName" name="brandName" placeholder="与工具01一致"></div>
+      <div class="field"><label class="required" for="version">品牌屋版本／战略周期</label><input id="version" name="version" placeholder="例：2026—2028／V0.1"></div>
+      <div class="field"><label class="required" for="assessor">本次判断主责人</label><input id="assessor" name="assessor"></div>
+      <div class="field"><label class="required" for="assessmentDate">判断日期</label><input id="assessmentDate" name="assessmentDate" type="date"></div>
+      <div class="field full"><label class="required" for="businessScope">本轮业务范围与必须排除项</label><textarea id="businessScope" name="businessScope" placeholder="写清本轮覆盖的品类、区域、渠道或产品范围，以及不重做的产品战略／传播／经营工作包"></textarea></div>
+    </div>
+
+    <h2>二、先排除错误分流</h2>
+    <div class="check-list">
+      <label class="check-item"><input type="checkbox" name="oneBrand"><span>确认本表只服务一个独立品牌；企业、母子品牌、系列和单品关系已在工具01说明。</span></label>
+      <label class="check-item"><input type="checkbox" name="independentMvv"><span>确认本品牌仍需独立形成并验证自己的使命、愿景、价值观，不复制集团MVV。</span></label>
+      <label class="check-item"><input type="checkbox" name="evidenceRead"><span>已阅读现有材料、历史表达和触点；课堂口述或候选文案已标为假设／待核查，而不是事实。</span></label>
+      <label class="check-item"><input type="checkbox" name="riskRoute"><span>阶段不明或关键风险较高时，承诺采用更深取证路径，而非用“暂定”跳过验证。</span></label>
+    </div>
+
+    <h2>三、阶段判断：逐项记录证据，不做总分猜测</h2>
+    <p class="field-help">每一行至少写一份文件、访谈、触点样本或明确的未知项。这里的“表现”只用于确定研究深度，不等于对品牌经营或市场表现作出结论。</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>判断维度</th><th>0到1／阶段性构建的信号</th><th>竞争期校准的信号</th><th>成熟品牌考古／重审的信号</th><th>本品牌可回读依据／未知项</th><th>当前判断</th></tr></thead>
+        <tbody>
+          <tr><td>品牌与业务事实</td><td>主体、产品、场景或上市路径尚在定义</td><td>已有稳定业务边界，正面对竞争选择</td><td>已有多轮历史材料、组织惯性或资产需要审计</td><td><textarea name="evidenceBusiness" placeholder="来源、日期、页码／链接；没有则写未知"></textarea></td><td><select name="judgmentBusiness"><option value="">请选择</option><option>偏0到1</option><option>偏竞争期</option><option>偏成熟／重审</option><option>未知</option></select></td></tr>
+          <tr><td>品牌资产与MVV</td><td>独立MVV仍需从访谈和假设建立</td><td>已有表达但与定位、触点或团队认知不一致</td><td>已有历史MVV、口号和故事，需要继承／升级／淘汰裁决</td><td><textarea name="evidenceMvv" placeholder="只记录能回读的材料；不要补造结论"></textarea></td><td><select name="judgmentMvv"><option value="">请选择</option><option>偏0到1</option><option>偏竞争期</option><option>偏成熟／重审</option><option>未知</option></select></td></tr>
+          <tr><td>用户、场景与竞争</td><td>核心人群、场景、比较对象仍在验证</td><td>用户与竞品选择已显现，需要校准差异化价值</td><td>需回看历史用户认知、资产与当前竞争变化</td><td><textarea name="evidenceAudience" placeholder="访谈、研究、渠道反馈或明确缺口"></textarea></td><td><select name="judgmentAudience"><option value="">请选择</option><option>偏0到1</option><option>偏竞争期</option><option>偏成熟／重审</option><option>未知</option></select></td></tr>
+          <tr><td>RTB与真实触点</td><td>产品、体验、背书证据或交付能力正在建设</td><td>已有证据但需判断是否仍影响选择、能否持续</td><td>需盘点历史承诺、当前体验和组织行为是否一致</td><td><textarea name="evidenceRtb" placeholder="产品／体验／背书证据及适用范围，或待建设项"></textarea></td><td><select name="judgmentRtb"><option value="">请选择</option><option>偏0到1</option><option>偏竞争期</option><option>偏成熟／重审</option><option>未知</option></select></td></tr>
+          <tr><td>变更与重审风险</td><td>即将发生主体、业务或上市方式的重要确定</td><td>定位、核心客群、价值或RTB被竞争和市场变化挑战</td><td>战略、资产、合规或组织行为变化要求重新审视历史承诺</td><td><textarea name="evidenceRisk" placeholder="写明已发生／预期事件和信息来源"></textarea></td><td><select name="judgmentRisk"><option value="">请选择</option><option>偏0到1</option><option>偏竞争期</option><option>偏成熟／重审</option><option>未知</option></select></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>四、选择路径与最低工作量</h2>
+    <div class="grid three">
+      <div class="field"><label class="required" for="selectedStage">阶段分流结果（辅助判断，非正式裁决）</label><select id="selectedStage" name="selectedStage"><option value="">请选择</option><option>0到1／阶段性构建</option><option>竞争期校准</option><option>成熟品牌考古／重审</option><option>证据混合，按成熟品牌考古／重审执行</option><option>暂不能判断，先补证</option></select></div>
+      <div class="field"><label class="required" for="confidence">判断置信度</label><select id="confidence" name="confidence"><option value="">请选择</option><option>高：主要依据可回读且一致</option><option>中：有关键缺口或冲突</option><option>低：仅有初步线索</option></select></div>
+      <div class="field"><label class="required" for="reviewDate">阶段复核日</label><input id="reviewDate" name="reviewDate" type="date"></div>
+      <div class="field full"><label class="required" for="decisionReason">结论与反证</label><textarea id="decisionReason" name="decisionReason" placeholder="说明为什么选这一路径；同时写出可能推翻结论的反证和补证动作"></textarea></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>选定路径</th><th>本轮必须完成</th><th>允许暂留的内容</th><th>不可跳过的门槛</th><th>本轮版本出口</th></tr></thead>
+        <tbody>
+          <tr><td>0到1／阶段性构建</td><td>边界卡；独立MVV候选；定位三角假设；核心“更XX”五项检查；RTB和能力缺口；验证计划</td><td>尚未成熟的用户、产品、体验或背书证据，但必须标待验证／待建设并有责任人和日期</td><td>不可把课堂口述或未来能力写成当前事实；不可跳过独立MVV和差异化价值五项门</td><td>目标状态草案＋验证／建设计划</td></tr>
+          <tr><td>竞争期校准</td><td>现有品牌屋、用户选择、竞品比较、核心“更XX”、RTB、触点一致性和断点复核</td><td>需要补样的研究或证据，但要明确它是否影响本轮核心取舍</td><td>不可只改口号或包装就宣布升级；必须回看定位三角和RTB相对持续性</td><td>校准评审版＋断点修复清单</td></tr>
+          <tr><td>成熟品牌考古／重审</td><td>历史版本、创始人／组织访谈、真实故事和反例、用户认知、产品与触点、保留／升级／淘汰裁决</td><td>无法找到的历史证据可标未知，但不能用想象补齐</td><td>不可把老口号、集团MVV或惯例直接当品牌答案；必须逐项审计其真实行为与当前适用性</td><td>考古证据包＋继承／升级／淘汰建议＋重审版</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>五、证据、责任与退出条件</h2>
+    <div class="grid two">
+      <div class="field"><label class="required" for="missingEvidence">必须补齐的证据与来源</label><textarea id="missingEvidence" name="missingEvidence" placeholder="每项写证据类型、负责人、获取方式和截止日"></textarea></div>
+      <div class="field"><label class="required" for="participants">本轮必须参与的角色</label><textarea id="participants" name="participants" placeholder="例：品牌／策略／产品／研发质量／销售渠道／合规；按阶段增减但说明理由"></textarea></div>
+      <div class="field"><label class="required" for="nextAction">下一步动作</label><textarea id="nextAction" name="nextAction" placeholder="按顺序写材料、访谈、研究、共创、评审与版本动作"></textarea></div>
+      <div class="field"><label class="required" for="exitCriteria">本阶段退出条件</label><textarea id="exitCriteria" name="exitCriteria" placeholder="例：关键来源可回读；目标状态和当前事实已拆分；待验证／待建设均有责任人、验证方法和日期"></textarea></div>
+    </div>
+    <div class="output-box">
+      <div class="field"><label class="required" for="routingStatement">阶段分流结论句</label><textarea id="routingStatement" name="routingStatement" placeholder="【品牌】在【周期】按【阶段】路径推进；因【依据】采取【取证深度】；本轮输出【版本出口】，在【复核日】前补齐【关键证据】。"></textarea></div>
+    </div>
+    <div class="grid three">
+      <div class="field"><label class="required" for="finalDecision">评审结论</label><select id="finalDecision" name="finalDecision"><option value="">请选择</option><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select><p class="field-help">路径、补证条件和暂停原因写入结论与反证，不写成第五种裁决。</p></div>
+      <div class="field"><label for="approver">裁决人</label><input id="approver" name="approver"></div>
+      <div class="field"><label for="approvalDate">裁决日期</label><input id="approvalDate" name="approvalDate" type="date"></div>
+    </div>
+    <div class="review-box"><strong>验收提醒：</strong>阶段分流通过，不表示品牌屋已完成。验收人应随机抽两项阶段依据，能回读到来源并判断其对路径的影响；再检查所有待验证／待建设项是否有责任人、动作、验证方式和日期。任何一项缺失，结论只能是“条件通过”或“退回”。</div>
+    <div class="tool-footer">工具03｜阶段决定取证深度，不决定是否做品牌屋 · 数据仅保存在当前浏览器本机 · 请将评审通过版打印或纳入项目版本归档</div>
+  </main>
+  <script src="工具模板脚本.js"></script>
+</body>
+</html>

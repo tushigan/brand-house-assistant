@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>工具02｜品牌材料审计与冲突表</title>
+  <link rel="stylesheet" href="工具模板样式.css">
+</head>
+<body data-tool-id="02-品牌材料审计与冲突表">
+  <main class="tool-sheet">
+    <div class="tool-kicker">快消食品品牌屋构建橙皮书 · 工具 02</div>
+    <h1>品牌材料审计与冲突表</h1>
+    <p class="tool-subtitle">Brand Material Audit and Conflict Register</p>
+    <div class="confidential">公司内部资料，请勿外传。本表只记录材料角色、事实状态、冲突、缺口与裁决，不把课堂口述或漂亮句子自动升级为品牌事实。</div>
+    <div class="tool-toolbar">
+      <button type="button" data-action="save">保存本机草稿</button>
+      <button type="button" class="secondary" data-action="print">打印／导出PDF</button>
+      <button type="button" class="danger" data-action="reset">清空当前工具</button>
+      <span class="save-status" data-save-status>尚未填写</span>
+    </div>
+    <div class="instruction">
+      <strong>谁填写：</strong>资料管理员建表，策略负责人裁决，品牌、产品、研发、质量、供应链、销售和合规按角色补证。<br>
+      <strong>何时填写：</strong>边界卡通过后、正式共创前；发现新文件或来源冲突时追加记录。<br>
+      <strong>怎么判：</strong>每条材料必须能说明来源、角色、状态、影响字段、冲突／缺口和下一步裁决。<br>
+      <strong>正文入口：</strong><a href="../fragments/ch01-品牌屋不是什么.html#part1">§01 材料角色与排除项</a>；<a href="../fragments/ch03-品牌边界目标状态与版本管理.html#part3">§03 版本与状态管理</a>。
+    </div>
+    <h2>一、审计任务身份</h2>
+    <div class="grid four">
+      <div class="field"><label class="required" for="brand">独立品牌</label><input id="brand" name="brand" placeholder="与工具01保持一致"></div>
+      <div class="field"><label class="required" for="cycle">战略周期／版本</label><input id="cycle" name="cycle"></div>
+      <div class="field"><label for="auditDate">审计日期</label><input id="auditDate" name="auditDate" type="date"></div>
+      <div class="field"><label class="required" for="auditor">资料审计负责人</label><input id="auditor" name="auditor"></div>
+      <div class="field full"><label for="auditPurpose">本轮审计目的与范围</label><textarea id="auditPurpose" name="auditPurpose" placeholder="例：为2026—2028品牌屋共创整理历史表达、产品事实、用户证据和冲突项"></textarea></div>
+    </div>
+    <h2>二、材料角色字典</h2>
+    <div class="grid three">
+      <div class="field"><label class="required" for="roleUpper">上位约束</label><textarea id="roleUpper" name="roleUpper" placeholder="企业／集团战略、法规、组织边界"></textarea></div>
+      <div class="field"><label class="required" for="roleBrand">品牌层材料</label><textarea id="roleBrand" name="roleBrand" placeholder="品牌历史、MVV、定位、口号、行为证据"></textarea></div>
+      <div class="field"><label class="required" for="roleProduct">产品与用户输入</label><textarea id="roleProduct" name="roleProduct" placeholder="产品战略、产品事实、用户研究、竞品与场景"></textarea></div>
+      <div class="field"><label for="roleExpression">表达与传播材料</label><textarea id="roleExpression" name="roleExpression" placeholder="包装、内容、广告、招商、招聘、培训"></textarea></div>
+      <div class="field"><label for="roleEvidence">证据与合规材料</label><textarea id="roleEvidence" name="roleEvidence" placeholder="检测、认证、质量、交付、授权和法规来源"></textarea></div>
+      <div class="field"><label for="roleHypothesis">假设与待核查线索</label><textarea id="roleHypothesis" name="roleHypothesis" placeholder="课堂口述、内部候选、尚无来源的判断"></textarea></div>
+    </div>
+    <div class="review-box"><strong>使用原则：</strong>“材料角色”不等于“结论状态”。同一份培训稿可能包含方法口径、策略假设和待核查事实，必须逐条拆分；不能因文件标题权威就整体判为事实。</div>
+    <h2>三、逐条材料审计记录</h2>
+    <p class="field-help">建议每行只记录一个可裁决单元。来源要能回读到文件、页码、段落、时间码、链接或实物编号。</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>编号／材料来源</th><th>材料角色与层级</th><th>原文或事实摘录</th><th>内容性质</th><th>证据状态</th><th>能力状态</th><th>正式裁决</th><th>影响字段</th><th>可回读来源／日期</th><th>责任人与下一步</th></tr></thead>
+        <tbody>
+          <tr><td><input name="row1id" placeholder="M-001／文件名"></td><td><select name="row1role"><option>请选择</option><option>上位约束</option><option>品牌层</option><option>产品输入</option><option>用户证据</option><option>表达资产</option><option>证据／合规</option><option>假设／待核查</option></select></td><td><textarea name="row1excerpt"></textarea></td><td><select name="row1Nature"><option value="">请选择</option><option>当前事实</option><option>策略假设</option></select></td><td><select name="row1status"><option value="">请选择</option><option>已证实</option><option>待验证</option></select></td><td><select name="row1Ability"><option value="">请选择</option><option>已具备</option><option>待建设</option></select></td><td><select name="row1Decision"><option value="">请选择</option><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></td><td><input name="row1field" placeholder="MVV／定位／RTB"></td><td><textarea name="row1source"></textarea></td><td><textarea name="row1action"></textarea></td></tr>
+          <tr><td><input name="row2id" placeholder="M-002／文件名"></td><td><select name="row2role"><option>请选择</option><option>上位约束</option><option>品牌层</option><option>产品输入</option><option>用户证据</option><option>表达资产</option><option>证据／合规</option><option>假设／待核查</option></select></td><td><textarea name="row2excerpt"></textarea></td><td><select name="row2Nature"><option value="">请选择</option><option>当前事实</option><option>策略假设</option></select></td><td><select name="row2status"><option value="">请选择</option><option>已证实</option><option>待验证</option></select></td><td><select name="row2Ability"><option value="">请选择</option><option>已具备</option><option>待建设</option></select></td><td><select name="row2Decision"><option value="">请选择</option><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></td><td><input name="row2field" placeholder="MVV／定位／RTB"></td><td><textarea name="row2source"></textarea></td><td><textarea name="row2action"></textarea></td></tr>
+          <tr><td><input name="row3id" placeholder="M-003／文件名"></td><td><select name="row3role"><option>请选择</option><option>上位约束</option><option>品牌层</option><option>产品输入</option><option>用户证据</option><option>表达资产</option><option>证据／合规</option><option>假设／待核查</option></select></td><td><textarea name="row3excerpt"></textarea></td><td><select name="row3Nature"><option value="">请选择</option><option>当前事实</option><option>策略假设</option></select></td><td><select name="row3status"><option value="">请选择</option><option>已证实</option><option>待验证</option></select></td><td><select name="row3Ability"><option value="">请选择</option><option>已具备</option><option>待建设</option></select></td><td><select name="row3Decision"><option value="">请选择</option><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></td><td><input name="row3field" placeholder="MVV／定位／RTB"></td><td><textarea name="row3source"></textarea></td><td><textarea name="row3action"></textarea></td></tr>
+          <tr><td><input name="row4id" placeholder="M-004／文件名"></td><td><select name="row4role"><option>请选择</option><option>上位约束</option><option>品牌层</option><option>产品输入</option><option>用户证据</option><option>表达资产</option><option>证据／合规</option><option>假设／待核查</option></select></td><td><textarea name="row4excerpt"></textarea></td><td><select name="row4Nature"><option value="">请选择</option><option>当前事实</option><option>策略假设</option></select></td><td><select name="row4status"><option value="">请选择</option><option>已证实</option><option>待验证</option></select></td><td><select name="row4Ability"><option value="">请选择</option><option>已具备</option><option>待建设</option></select></td><td><select name="row4Decision"><option value="">请选择</option><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></td><td><input name="row4field" placeholder="MVV／定位／RTB"></td><td><textarea name="row4source"></textarea></td><td><textarea name="row4action"></textarea></td></tr>
+          <tr><td><input name="row5id" placeholder="M-005／文件名"></td><td><select name="row5role"><option>请选择</option><option>上位约束</option><option>品牌层</option><option>产品输入</option><option>用户证据</option><option>表达资产</option><option>证据／合规</option><option>假设／待核查</option></select></td><td><textarea name="row5excerpt"></textarea></td><td><select name="row5Nature"><option value="">请选择</option><option>当前事实</option><option>策略假设</option></select></td><td><select name="row5status"><option value="">请选择</option><option>已证实</option><option>待验证</option></select></td><td><select name="row5Ability"><option value="">请选择</option><option>已具备</option><option>待建设</option></select></td><td><select name="row5Decision"><option value="">请选择</option><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></td><td><input name="row5field" placeholder="MVV／定位／RTB"></td><td><textarea name="row5source"></textarea></td><td><textarea name="row5action"></textarea></td></tr>
+          <tr><td><input name="row6id" placeholder="M-006／文件名"></td><td><select name="row6role"><option>请选择</option><option>上位约束</option><option>品牌层</option><option>产品输入</option><option>用户证据</option><option>表达资产</option><option>证据／合规</option><option>假设／待核查</option></select></td><td><textarea name="row6excerpt"></textarea></td><td><select name="row6Nature"><option value="">请选择</option><option>当前事实</option><option>策略假设</option></select></td><td><select name="row6status"><option value="">请选择</option><option>已证实</option><option>待验证</option></select></td><td><select name="row6Ability"><option value="">请选择</option><option>已具备</option><option>待建设</option></select></td><td><select name="row6Decision"><option value="">请选择</option><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></td><td><input name="row6field" placeholder="MVV／定位／RTB"></td><td><textarea name="row6source"></textarea></td><td><textarea name="row6action"></textarea></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>四、冲突、缺口与裁决</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>冲突／缺口编号</th><th>冲突双方或未知项</th><th>影响与风险</th><th>优先级／裁决规则</th><th>最终裁决</th><th>验证方式、责任人、截止日</th></tr></thead>
+        <tbody>
+          <tr><td><input name="conflict1id" placeholder="C-001"></td><td><textarea name="conflict1sides"></textarea></td><td><textarea name="conflict1risk"></textarea></td><td><select name="conflict1priority"><option>高</option><option>中</option><option>低</option></select><textarea name="conflict1rule" placeholder="用户最新确认／逐字稿／模型图…"></textarea></td><td><select name="conflict1decision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select><textarea name="conflict1result" placeholder="采用来源、改写方式与理由"></textarea></td><td><textarea name="conflict1owner"></textarea></td></tr>
+          <tr><td><input name="conflict2id" placeholder="C-002"></td><td><textarea name="conflict2sides"></textarea></td><td><textarea name="conflict2risk"></textarea></td><td><select name="conflict2priority"><option>高</option><option>中</option><option>低</option></select><textarea name="conflict2rule"></textarea></td><td><select name="conflict2decision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select><textarea name="conflict2result" placeholder="具体处理与理由"></textarea></td><td><textarea name="conflict2owner"></textarea></td></tr>
+          <tr><td><input name="conflict3id" placeholder="C-003"></td><td><textarea name="conflict3sides"></textarea></td><td><textarea name="conflict3risk"></textarea></td><td><select name="conflict3priority"><option>高</option><option>中</option><option>低</option></select><textarea name="conflict3rule"></textarea></td><td><select name="conflict3decision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select><textarea name="conflict3result" placeholder="具体处理与理由"></textarea></td><td><textarea name="conflict3owner"></textarea></td></tr>
+          <tr><td><input name="conflict4id" placeholder="C-004"></td><td><textarea name="conflict4sides"></textarea></td><td><textarea name="conflict4risk"></textarea></td><td><select name="conflict4priority"><option>高</option><option>中</option><option>低</option></select><textarea name="conflict4rule"></textarea></td><td><select name="conflict4decision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select><textarea name="conflict4result" placeholder="具体处理与理由"></textarea></td><td><textarea name="conflict4owner"></textarea></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>五、审计结论与移交</h2>
+    <div class="grid three">
+      <div class="field"><label class="required" for="overallStatus">整体材料正式裁决</label><select id="overallStatus" name="overallStatus"><option>请选择</option><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></div>
+      <div class="field"><label for="handoffOwner">移交负责人</label><input id="handoffOwner" name="handoffOwner"></div>
+      <div class="field"><label for="handoffDate">移交日期</label><input id="handoffDate" name="handoffDate" type="date"></div>
+      <div class="field full"><label class="required" for="auditConclusion">审计结论</label><textarea id="auditConclusion" name="auditConclusion" placeholder="写明哪些内容可用、哪些只能作为假设、哪些必须补证或淘汰"></textarea></div>
+      <div class="field full"><label for="nextActions">下一步动作与验收条件</label><textarea id="nextActions" name="nextActions"></textarea></div>
+    </div>
+    <div class="review-box"><strong>提醒：</strong>“待核查”不是事实；“策略假设”不是用户证据；“当前事实”也不自动等于差异化价值。食品营养、健康、安全、认证、添加剂和功效表述需另过法规与标签核查。</div>
+    <div class="tool-footer">工具02｜材料来源 → 角色 → 状态 → 冲突／缺口 → 裁决 · 数据仅保存在当前浏览器本机</div>
+  </main>
+  <script src="工具模板脚本.js"></script>
+</body>
+</html>

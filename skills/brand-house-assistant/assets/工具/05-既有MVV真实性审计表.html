@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>工具05｜既有MVV真实性审计表</title>
+  <link rel="stylesheet" href="工具模板样式.css">
+</head>
+<body data-tool-id="05-mvv-audit">
+  <main class="tool-sheet">
+    <div class="tool-kicker">工具05 · 对应第5章</div>
+    <h1>既有MVV真实性审计表</h1>
+    <p class="tool-subtitle">逐项判断愿景、使命和价值观应继承、升级、淘汰还是新建。</p>
+    <div class="confidential">公司内部资料，请勿外传。每个独立品牌单独填写；企业层MVV可以成为约束，但不能直接复制为品牌答案。</div>
+    <div class="tool-toolbar">
+      <button type="button" data-action="save">保存本机草稿</button>
+      <button type="button" class="secondary" data-action="print">打印/存为PDF</button>
+      <button type="button" class="danger" data-action="reset">清空当前工具</button>
+      <span class="save-status" data-save-status></span>
+    </div>
+    <section class="instruction"><strong>使用方法：</strong>成熟品牌先录入既有原文和出处；0到1品牌把“既有原文”改填为“当前候选”。没有故事、反例和组织行为证据时，不得直接判为通过。</section>
+
+    <h2>一、品牌与审计范围</h2>
+    <div class="grid three">
+      <div class="field"><label class="required">独立品牌</label><input name="brand"></div>
+      <div class="field"><label>品牌阶段</label><select name="stage"><option value="">请选择</option><option>0到1</option><option>竞争期</option><option>成熟品牌</option></select></div>
+      <div class="field"><label>版本/战略周期</label><input name="cycle"></div>
+      <div class="field"><label>审计负责人</label><input name="owner"></div>
+      <div class="field"><label>最终确认人</label><input name="approver"></div>
+      <div class="field"><label>复核日期</label><input type="date" name="reviewDate"></div>
+      <div class="field full"><label>企业层MVV与本品牌的关系</label><textarea name="enterpriseRelation"></textarea></div>
+    </div>
+
+    <h2>二、逐项真实性审计</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>字段</th><th>既有原文/候选</th><th>原始出处和形成时间</th><th>真实故事与代价</th><th>反例</th><th>层级是否正确</th><th>裁决</th></tr></thead>
+      <tbody>
+        <tr><td>愿景</td><td><textarea name="visionText"></textarea></td><td><textarea name="visionSource"></textarea></td><td><textarea name="visionStory"></textarea></td><td><textarea name="visionCounter"></textarea></td><td><select name="visionLevel"><option>待判断</option><option>是</option><option>否</option></select></td><td><select name="visionDecision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></td></tr>
+        <tr><td>使命</td><td><textarea name="missionText"></textarea></td><td><textarea name="missionSource"></textarea></td><td><textarea name="missionStory"></textarea></td><td><textarea name="missionCounter"></textarea></td><td><select name="missionLevel"><option>待判断</option><option>是</option><option>否</option></select></td><td><select name="missionDecision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></td></tr>
+        <tr><td>价值观1</td><td><textarea name="value1Text"></textarea></td><td><textarea name="value1Source"></textarea></td><td><textarea name="value1Story"></textarea></td><td><textarea name="value1Counter"></textarea></td><td><select name="value1Level"><option>待判断</option><option>是</option><option>否</option></select></td><td><select name="value1Decision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></td></tr>
+        <tr><td>价值观2</td><td><textarea name="value2Text"></textarea></td><td><textarea name="value2Source"></textarea></td><td><textarea name="value2Story"></textarea></td><td><textarea name="value2Counter"></textarea></td><td><select name="value2Level"><option>待判断</option><option>是</option><option>否</option></select></td><td><select name="value2Decision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></td></tr>
+        <tr><td>价值观3</td><td><textarea name="value3Text"></textarea></td><td><textarea name="value3Source"></textarea></td><td><textarea name="value3Story"></textarea></td><td><textarea name="value3Counter"></textarea></td><td><select name="value3Level"><option>待判断</option><option>是</option><option>否</option></select></td><td><select name="value3Decision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>三、愿景与使命专项检查</h2>
+    <div class="check-list">
+      <label class="check-item"><input type="checkbox" name="oneBrand"><span>只处理一个独立品牌，没有与企业、集团或系列混写</span></label>
+      <label class="check-item"><input type="checkbox" name="visionFuture"><span>愿景描述受益对象和未来图景，不是规模、排名或经营指标</span></label>
+      <label class="check-item"><input type="checkbox" name="missionReason"><span>使命说明服务谁、长期解决什么和为何持续投入</span></label>
+      <label class="check-item"><input type="checkbox" name="mutualSupport"><span>使命长期兑现后能够推动愿景中的变化</span></label>
+      <label class="check-item"><input type="checkbox" name="choiceTest"><span>已用产品、渠道、成本/质量三类情境测试取舍</span></label>
+      <label class="check-item"><input type="checkbox" name="stateMarked"><span>事实、策略假设、待验证和待建设已分开标注</span></label>
+    </div>
+
+    <h2>四、裁决后的正式输出</h2>
+    <div class="grid">
+      <div class="field"><label>品牌愿景</label><textarea name="finalVision"></textarea></div>
+      <div class="field"><label>愿景内容性质</label><select name="visionNature"><option>当前事实</option><option>策略假设</option></select></div>
+      <div class="field"><label>愿景证据状态</label><select name="visionState"><option>已证实</option><option>待验证</option></select></div>
+      <div class="field"><label>愿景能力状态</label><select name="visionAbility"><option>已具备</option><option>待建设</option></select></div>
+      <div class="field"><label>愿景裁决状态</label><select name="visionFinalDecision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></div>
+      <div class="field"><label>品牌使命</label><textarea name="finalMission"></textarea></div>
+      <div class="field"><label>使命内容性质</label><select name="missionNature"><option>当前事实</option><option>策略假设</option></select></div>
+      <div class="field"><label>使命证据状态</label><select name="missionState"><option>已证实</option><option>待验证</option></select></div>
+      <div class="field"><label>使命能力状态</label><select name="missionAbility"><option>已具备</option><option>待建设</option></select></div>
+      <div class="field"><label>使命裁决状态</label><select name="missionFinalDecision"><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select></div>
+      <div class="field full"><label>边界：哪些业务或行为不属于本品牌</label><textarea name="boundaries"></textarea></div>
+      <div class="field"><label>待补证据/待建设能力</label><textarea name="gaps"></textarea></div>
+      <div class="field"><label>责任人、验证方式和期限</label><textarea name="verification"></textarea></div>
+      <div class="field full"><label>最终裁决理由</label><textarea name="decisionReason"></textarea></div>
+    </div>
+
+    <footer class="tool-footer">“继承”不等于原文曾经存在；只有层级正确、事实支持、组织仍认同并能指导取舍，才可继承。</footer>
+  </main>
+  <script src="工具模板脚本.js"></script>
+</body>
+</html>

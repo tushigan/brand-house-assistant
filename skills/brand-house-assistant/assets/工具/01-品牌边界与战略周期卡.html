@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>工具01｜品牌边界与战略周期卡</title>
+  <link rel="stylesheet" href="工具模板样式.css">
+</head>
+<body data-tool-id="01-品牌边界与战略周期卡">
+  <main class="tool-sheet">
+    <div class="tool-kicker">快消食品品牌屋构建橙皮书 · 工具 01</div>
+    <h1>品牌边界与战略周期卡</h1>
+    <p class="tool-subtitle">Brand Scope and Strategic Cycle Card</p>
+    <div class="confidential">公司内部资料，请勿外传。本卡一份只处理一个独立品牌。企业或集团MVV只作为上位约束，不得直接复制为品牌自己的使命、愿景和价值观。</div>
+    <div class="tool-toolbar">
+      <button type="button" data-action="save">保存本机草稿</button>
+      <button type="button" class="secondary" data-action="print">打印／导出PDF</button>
+      <button type="button" class="danger" data-action="reset">清空当前工具</button>
+      <span class="save-status" data-save-status>尚未填写</span>
+    </div>
+    <div class="instruction">
+      <strong>谁填写：</strong>项目负责人牵头，品牌负责人、企业战略负责人和产品负责人共同确认。<br>
+      <strong>何时填写：</strong>材料审计和品牌屋共创之前；品牌主体、核心业务或战略周期变化时重填。<br>
+      <strong>怎么判：</strong>品牌、主体、业务范围、战略周期、目标状态和重审触发缺一项，不能进入正式品牌屋构建。<br>
+      <strong>正文入口：</strong><a href="../fragments/ch01-品牌屋不是什么.html#part1">§01 品牌屋不是什么</a>；<a href="../fragments/ch02-战略层级构建顺序与验证顺序.html#part2">§02 构建与验证顺序</a>；<a href="../fragments/ch03-品牌边界目标状态与版本管理.html#part3">§03 边界、目标状态与版本管理</a>。
+    </div>
+    <h2>一、卡片身份</h2>
+    <div class="grid four">
+      <div class="field"><label class="required" for="brandName">独立品牌正式名称</label><input id="brandName" name="brandName" placeholder="一张卡只填一个品牌"></div>
+      <div class="field"><label for="brandAlias">品牌简称／历史称呼</label><input id="brandAlias" name="brandAlias" placeholder="用于识别转写或旧资料"></div>
+      <div class="field"><label class="required" for="version">品牌屋版本号</label><input id="version" name="version" placeholder="例：WKD／2026—2028／V0.1"></div>
+      <div class="field"><label class="required" for="baselineDate">证据基准日</label><input id="baselineDate" name="baselineDate" type="date"></div>
+      <div class="field"><label class="required" for="owner">项目主责人</label><input id="owner" name="owner"></div>
+      <div class="field"><label for="approver">边界批准人</label><input id="approver" name="approver"></div>
+      <div class="field"><label for="cardStatus">流程状态（辅助判断，非正式裁决）</label><select id="cardStatus" name="cardStatus"><option value="">请选择</option><option>草案</option><option>待核查</option><option>评审通过</option><option>已生效</option><option>已归档</option></select></div>
+      <div class="field"><label for="confidentiality">保密等级</label><select id="confidentiality" name="confidentiality"><option>公司内部</option><option>项目核心组</option><option>经授权可对客</option></select></div>
+    </div>
+    <h2>二、品牌主体与关系边界</h2>
+    <div class="grid three">
+      <div class="field"><label class="required" for="rightsOwner">品牌／商标权利主体</label><textarea id="rightsOwner" name="rightsOwner" placeholder="主体名称、待核查项及来源"></textarea></div>
+      <div class="field"><label class="required" for="brandRelation">企业、母品牌、子品牌关系</label><textarea id="brandRelation" name="brandRelation" placeholder="写清上下位关系，不凭口述补造"></textarea></div>
+      <div class="field"><label for="seriesBoundary">系列、产品线与单品关系</label><textarea id="seriesBoundary" name="seriesBoundary" placeholder="哪些属于本品牌，哪些需另建卡"></textarea></div>
+    </div>
+    <div class="check-list" style="margin-top:14px">
+      <label class="check-item"><input type="checkbox" name="oneBrand"><span>本卡只服务一个独立品牌，没有把企业、子品牌、系列和单品混在同一层。</span></label>
+      <label class="check-item"><input type="checkbox" name="independentMvv"><span>已确认该品牌需要自己单独的使命、愿景、价值观，不直接复制企业／集团MVV。</span></label>
+      <label class="check-item"><input type="checkbox" name="sourceReadable"><span>主体和品牌关系有可回读来源；没有来源的内容已标待核查。</span></label>
+      <label class="check-item"><input type="checkbox" name="relationApproved"><span>品牌负责人和企业战略负责人已对层级关系形成一致意见。</span></label>
+    </div>
+    <h2>三、本轮业务范围</h2>
+    <div class="grid three">
+      <div class="field"><label class="required" for="categoryScope">品类／业务范围</label><textarea id="categoryScope" name="categoryScope" placeholder="本轮覆盖哪些业务"></textarea></div>
+      <div class="field"><label for="productScope">产品范围</label><textarea id="productScope" name="productScope" placeholder="覆盖的产品线、系列、SKU边界"></textarea></div>
+      <div class="field"><label for="marketScope">区域与市场范围</label><textarea id="marketScope" name="marketScope" placeholder="全国、区域、试点市场或待确认"></textarea></div>
+      <div class="field"><label for="channelScope">渠道范围</label><textarea id="channelScope" name="channelScope" placeholder="仅记录边界，不重做渠道战略"></textarea></div>
+      <div class="field"><label for="audienceSceneScope">核心客群与场景边界</label><textarea id="audienceSceneScope" name="audienceSceneScope" placeholder="已有结论或待验证范围"></textarea></div>
+      <div class="field"><label class="required" for="exclusions">明确排除项</label><textarea id="exclusions" name="exclusions" placeholder="例：不重做SKU组合、价带、年度媒介计划"></textarea></div>
+    </div>
+    <h2>四、战略周期与目标状态</h2>
+    <div class="grid four">
+      <div class="field"><label class="required" for="cycleStart">周期开始</label><input id="cycleStart" name="cycleStart" type="date"></div>
+      <div class="field"><label class="required" for="cycleEnd">周期结束</label><input id="cycleEnd" name="cycleEnd" type="date"></div>
+      <div class="field"><label for="nextReview">下一次定期复盘日</label><input id="nextReview" name="nextReview" type="date"></div>
+      <div class="field"><label for="stage">本轮阶段</label><select id="stage" name="stage"><option value="">待工具03判断</option><option>0到1／阶段性构建</option><option>竞争期校准</option><option>成熟品牌考古／重审</option></select></div>
+      <div class="field full"><label class="required" for="targetState">本周期品牌目标状态</label><textarea id="targetState" name="targetState" placeholder="描述本周期希望形成的品牌屋状态，不写成已经实现的事实"></textarea><p class="field-help">目标状态可以包含待验证／待建设字段，但必须在能力缺口表里有责任人与计划。</p></div>
+      <div class="field full"><label for="upperConstraints">企业／集团上位约束</label><textarea id="upperConstraints" name="upperConstraints" placeholder="只记录必须遵守的边界，不复制为品牌答案"></textarea></div>
+      <div class="field full"><label for="successCriteria">本周期完成判据</label><textarea id="successCriteria" name="successCriteria" placeholder="例：定位三角完成用户验证；关键RTB有可回读证据；六类触点完成一致性抽查"></textarea></div>
+    </div>
+    <h2>五、重大变化重审触发</h2>
+    <div class="check-list">
+      <label class="check-item"><input type="checkbox" name="triggerOwner"><span>权利主体、母子品牌或品牌架构关系发生变化。</span></label>
+      <label class="check-item"><input type="checkbox" name="triggerBusiness"><span>核心业务、品类、区域、渠道或战略周期发生实质变化。</span></label>
+      <label class="check-item"><input type="checkbox" name="triggerAudience"><span>核心客群与关键消费场景发生实质变化。</span></label>
+      <label class="check-item"><input type="checkbox" name="triggerValue"><span>核心差异化价值“更XX”或比较对象不再成立。</span></label>
+      <label class="check-item"><input type="checkbox" name="triggerRtb"><span>关键RTB失效、被反证、被普遍复制或新增强证据。</span></label>
+      <label class="check-item"><input type="checkbox" name="triggerRisk"><span>重大食品合规、质量、舆情或组织行为事件冲击品牌承诺。</span></label>
+    </div>
+    <div class="grid" style="margin-top:14px">
+      <div class="field"><label class="required" for="customTriggers">本品牌专属触发条件</label><textarea id="customTriggers" name="customTriggers" placeholder="写清可观察事件和判断标准"></textarea></div>
+      <div class="field"><label class="required" for="triggerProcess">触发后的负责人和处理时限</label><textarea id="triggerProcess" name="triggerProcess" placeholder="谁发起、谁裁决、多少天内完成影响评估"></textarea></div>
+    </div>
+    <h2>六、边界声明与评审结论</h2>
+    <div class="output-box">
+      <div class="field"><label class="required" for="scopeStatement">品牌边界声明</label><textarea id="scopeStatement" name="scopeStatement" placeholder="本次品牌屋服务【品牌】在【周期】内的【业务范围】；【上位约束】只作输入；【排除项】由其他工作包处理。"></textarea></div>
+    </div>
+    <div class="grid three">
+      <div class="field"><label class="required" for="decision">评审结论</label><select id="decision" name="decision"><option value="">请选择</option><option>待裁决</option><option>保留</option><option>退回</option><option>淘汰</option></select><p class="field-help">“通过”仅作“保留”的展示别名；待核查写入未解决项。</p></div>
+      <div class="field"><label for="decisionOwner">裁决人</label><input id="decisionOwner" name="decisionOwner"></div>
+      <div class="field"><label for="decisionDate">裁决日期</label><input id="decisionDate" name="decisionDate" type="date"></div>
+      <div class="field full"><label for="unresolved">未解决项、责任人与日期</label><textarea id="unresolved" name="unresolved"></textarea></div>
+    </div>
+    <div class="tool-footer">工具01｜一品牌一卡 · 数据仅保存在当前浏览器本机 · 请将评审通过版打印或纳入项目版本归档</div>
+  </main>
+  <script>
+    /*
+      只有边界证据和层级确认齐全时，才允许把本卡保存为“保留”。
+      草稿仍可保存；这个门只阻止把未知项误判为正式构建入口。
+    */
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest('[data-action="save"]');
+      if (!button) return;
+      const decision = document.querySelector('[name="decision"]');
+      const rightsOwner = document.querySelector('[name="rightsOwner"]');
+      const relation = document.querySelector('[name="brandRelation"]');
+      const hasUnknownBoundary = [rightsOwner, relation].some((field) => {
+        const value = (field && field.value || "").trim();
+        return !value || /待核查|未知|待确认/.test(value);
+      });
+      const checksComplete = ["oneBrand", "independentMvv", "sourceReadable", "relationApproved"]
+        .every((name) => document.querySelector(`[name="${name}"]`)?.checked);
+
+      if (decision?.value === "保留" && (hasUnknownBoundary || !checksComplete)) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        decision.value = "退回";
+        const status = document.querySelector('[data-save-status]');
+        if (status) status.textContent = "未通过：主体／关系来源或层级确认不完整，已退回补边界；可先保存草稿或做材料审计。";
+        window.BrandHouseTool?.save(false);
+      }
+    }, true);
+  </script>
+  <script src="工具模板脚本.js"></script>
+</body>
+</html>
