@@ -7,7 +7,7 @@
 把下面这句话发给 Codex Agent：
 
 ```text
-请使用 skill-installer 安装这个 Skill：https://github.com/OWNER/brand-house-assistant/tree/main/skills/brand-house-assistant
+请使用 skill-installer 安装这个 Skill：https://github.com/tushigan/brand-house-assistant/tree/main/skills/brand-house-assistant
 ```
 
 安装完成后新开一个对话，再输入：
