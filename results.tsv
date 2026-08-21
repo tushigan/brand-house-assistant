@@ -1,1 +1,2 @@
 timestamp	commit	skill	old_score	new_score	status	dimension	note	eval_mode
+2026-08-21T00:00:00+08:00	80909e7	brand-house-assistant	-	82.3	baseline	all	9维基线；dim8两位独立评审均为dry_run，分数8.0/8.8，均值8.4；dry_run_ratio=100%，dim8有效性警告；runtime_warn=0	dry_run
