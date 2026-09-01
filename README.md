@@ -2,12 +2,23 @@
 
 面向快消食品品牌的 Codex Skill，用于从零构建、品牌共创、策略启发、方法带教、审查评审、执行落地和版本重审品牌屋，并把已确认结论整理为可提报的逐字稿。
 
-## 一句话安装
+## 安装与更新
 
-把下面这句话发给 Codex Agent：
+把下面这一句话发给 Codex Agent。它同时适用于首次安装和已有 Skill 的更新：
 
 ```text
-请使用 skill-installer 安装这个 Skill：https://github.com/tushigan/brand-house-assistant/tree/main/skills/brand-house-assistant
+请管理本机的 brand-house-assistant，目标版本为 v1.3.1，唯一来源是：
+https://github.com/tushigan/brand-house-assistant/tree/v1.3.1/skills/brand-house-assistant
+
+先检查 ~/.codex/skills/brand-house-assistant 是否存在并读取本机版本：
+1. 如果不存在，直接安装这个版本。
+2. 如果存在且本机版本低于 v1.3.1，先将旧目录完整备份到
+   ~/.codex/skills-backups/brand-house-assistant/<时间戳>/，再替换为这个版本。
+3. 如果存在且已经是 v1.3.1 或更高版本，不要重复安装或覆盖，只报告当前版本。
+
+备份目录不能放在 ~/.codex/skills/ 下，目标目录只能保留一个当前生效的 brand-house-assistant。
+替换前核对新版本的 SKILL.md、references、assets、scripts 和 test-prompts.json；完成后检查
+VERSION、关键脚本和目录结构，并重新打开 Codex、新开一个对话验证 Skill 已生效。
 ```
 
 安装完成后新开一个对话，再输入：
@@ -25,11 +36,14 @@
 ## 能做什么
 
 - 从零构建独立品牌的品牌屋；
-- 共创使命、愿景、价值观、定位三角、RTB、主张、人格和口号；
-- 审查已有品牌屋，指出证据缺口与正确回退位置；
+- 共创使命、愿景、价值观、竞争战场、细分品类、消费场景、人群、定位三角、RTB、主张、人格和口号；
+- 审核已有品牌屋：先做结构初审，再通过少量白话问题还原结论背后的推导、证据和取舍；
+- 培训品牌屋整理能力，以及逐字稿理解、记忆和现场提报能力；
 - 把已裁决结论转成产品、包装、渠道、内容、服务和组织动作；
 - 对已经生效的品牌屋进行版本重审；
-- 使用快速、标准、深度三级渐进披露，避免每次加载整本方法原典。
+- 使用整理、共创、审核、培训、策略启发、执行落地和版本重审等工作模式；
+- 使用快速、标准、深度三级渐进披露，避免每次加载整本方法原典；
+- 通过案例库进行脱敏回归测试和方法复盘，案例不作为其他品牌的事实来源。
 
 核心交付边界是“品牌屋结论＋提报逐字稿”。本 Skill 不规定 PPT 的视觉制作方式，也不包含 HTML/PPT 文件生成、看片台实现或 PPT 与讲稿的页面一致性检查。
 
@@ -53,14 +67,6 @@ skills/brand-house-assistant/
 ```
 
 案例与评估记录位于 `skills/brand-house-assistant/案例库/` 和 `skills/brand-house-assistant/评估记录/`。案例用于回归测试和方法复盘，不作为其他品牌的事实来源；评估记录用于追踪规则变更、已验证能力和仍未完成的实测。
-
-## 更新
-
-标准安装器为防止误覆盖，发现本机已有同名 Skill 时会停止。更新时可以把下面这句话发给 Agent：
-
-```text
-请从这个 GitHub 仓库更新 brand-house-assistant。先备份本机旧版本，核对新版本结构和关键脚本后再替换，完成后重新打开对话。
-```
 
 正式版本使用 Git 标签记录；`main` 分支保存当前稳定版。
 
