@@ -10,7 +10,7 @@
 请管理本机的 brand-house-assistant，唯一来源是这个 GitHub 仓库：
 https://github.com/tushigan/brand-house-assistant
 
-先读取这个仓库当前的最新稳定版本（优先使用最新 Git 标签或 Release，不要把版本号写死在本提示词里），
+先从这个仓库读取当前最新稳定版本，优先采用最新 Release 或 Git 标签；
 并读取本机 ~/.codex/skills/brand-house-assistant 的版本信息：
 1. 如果不存在，直接安装仓库当前最新稳定版本。
 2. 如果存在且本机版本低于仓库当前最新稳定版本，先将旧目录完整备份到
