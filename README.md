@@ -7,14 +7,16 @@
 把下面这一句话发给 Codex Agent。它同时适用于首次安装和已有 Skill 的更新：
 
 ```text
-请管理本机的 brand-house-assistant，目标版本为 v1.3.1，唯一来源是：
-https://github.com/tushigan/brand-house-assistant/tree/v1.3.1/skills/brand-house-assistant
+请管理本机的 brand-house-assistant，唯一来源是这个 GitHub 仓库：
+https://github.com/tushigan/brand-house-assistant
 
-先检查 ~/.codex/skills/brand-house-assistant 是否存在并读取本机版本：
-1. 如果不存在，直接安装这个版本。
-2. 如果存在且本机版本低于 v1.3.1，先将旧目录完整备份到
-   ~/.codex/skills-backups/brand-house-assistant/<时间戳>/，再替换为这个版本。
-3. 如果存在且已经是 v1.3.1 或更高版本，不要重复安装或覆盖，只报告当前版本。
+先读取这个仓库当前的最新稳定版本（优先使用最新 Git 标签或 Release，不要把版本号写死在本提示词里），
+并读取本机 ~/.codex/skills/brand-house-assistant 的版本信息：
+1. 如果不存在，直接安装仓库当前最新稳定版本。
+2. 如果存在且本机版本低于仓库当前最新稳定版本，先将旧目录完整备份到
+   ~/.codex/skills-backups/brand-house-assistant/<时间戳>/，再替换为最新版本。
+3. 如果本机没有版本标记，视为版本未知，先备份，再核对并安装仓库当前最新稳定版本。
+4. 如果存在且已经是仓库当前最新稳定版本或更高版本，不要重复安装或覆盖，只报告当前版本。
 
 备份目录不能放在 ~/.codex/skills/ 下，目标目录只能保留一个当前生效的 brand-house-assistant。
 替换前核对新版本的 SKILL.md、references、assets、scripts 和 test-prompts.json；完成后检查
