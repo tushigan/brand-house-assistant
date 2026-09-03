@@ -1,26 +1,30 @@
 # 品牌屋助手
 
-面向快消食品品牌的 Codex Skill，用于从零构建、品牌共创、策略启发、方法带教、审查评审、执行落地和版本重审品牌屋，并把已确认结论整理为可提报的逐字稿。
+面向快消食品品牌的通用 Agent Skill，用于从零构建、品牌共创、策略启发、方法带教、审查评审、执行落地和版本重审品牌屋，并把已确认结论整理为可提报的逐字稿。核心文件是标准 Markdown 和可选工具，能够被不同 Agent 框架按各自的 Skill 规范加载。
 
 ## 安装与更新
 
-把下面这一句话发给 Codex Agent。它同时适用于首次安装和已有 Skill 的更新：
+把下面这一段话发给你正在使用的 Agent。它同时适用于首次安装和已有 Skill 的更新：
 
 ```text
 请管理本机的 brand-house-assistant，唯一来源是这个 GitHub 仓库：
 https://github.com/tushigan/brand-house-assistant
 
-先从这个仓库读取当前最新稳定版本，优先采用最新 Release 或 Git 标签；
-并读取本机 ~/.codex/skills/brand-house-assistant 的版本信息：
+先从这个仓库读取当前最新稳定版本，优先采用最新 Release 或 Git 标签。
+先识别当前 Agent 框架实际使用的用户级 Skill 根目录，只在这个目录查找和安装
+brand-house-assistant；不要读取、覆盖或写入其他 Agent 框架的 Skill 目录。
+读取该目录下 brand-house-assistant 的版本信息：
 1. 如果不存在，直接安装仓库当前最新稳定版本。
 2. 如果存在且本机版本低于仓库当前最新稳定版本，先将旧目录完整备份到
-   ~/.codex/skills-backups/brand-house-assistant/<时间戳>/，再替换为最新版本。
+   当前 Skill 根目录同级的 skills-backups/brand-house-assistant/<时间戳>/，再替换为最新版本。
 3. 如果本机没有版本标记，视为版本未知，先备份，再核对并安装仓库当前最新稳定版本。
 4. 如果存在且已经是仓库当前最新稳定版本或更高版本，不要重复安装或覆盖，只报告当前版本。
 
-备份目录不能放在 ~/.codex/skills/ 下，目标目录只能保留一个当前生效的 brand-house-assistant。
+备份目录不能放在当前 Skill 根目录之内，目标目录只能保留一个当前生效的 brand-house-assistant。
 替换前核对新版本的 SKILL.md、references、assets、scripts 和 test-prompts.json；完成后检查
-VERSION、关键脚本和目录结构，并重新打开 Codex、新开一个对话验证 Skill 已生效。
+VERSION、关键脚本和目录结构，并重新打开当前 Agent、新开一个对话验证 Skill 已生效。
+
+如果当前框架没有统一的用户级 Skill 根目录，就按该框架的官方目录约定安装；不要因为本机同时安装了多个 Agent，就把一个框架的 Skill 当成另一个框架的 Skill 使用。
 ```
 
 安装完成后新开一个对话，再输入：
@@ -46,7 +50,7 @@ VERSION、关键脚本和目录结构，并重新打开 Codex、新开一个对�
 - 使用整理、共创、审核、培训、策略启发、执行落地和版本重审等工作模式；
 - 使用快速、标准、深度三级渐进披露，避免每次加载整本方法原典；
 - 将已经确认的品牌屋结论填入空白的纯CSS标准模型，并直接编辑、保存版本、导入导出和调整文字版式；
-- 通过案例库进行脱敏回归测试和方法复盘，案例不作为其他品牌的事实来源。
+- 通过案例库进行脱敏回归测试和方法复盘，案例不作为其他品牌的事实来源；在询问“最佳实践”时，会先查案例索引再读取匹配案例。
 
 核心交付边界是“品牌屋结论＋提报逐字稿”。随附的HTML只用于呈现可编辑的标准品牌屋模型，不负责制作提报PPT；本 Skill 不规定 PPT 的视觉制作方式，也不包含HTML/PPT演示稿生成、看片台实现或PPT与讲稿的页面一致性检查。
 
@@ -74,6 +78,18 @@ skills/brand-house-assistant/
 标准模型HTML不带泓一或其他案例品牌的答案。使用时应先复制到具体项目目录并重命名，再在项目副本中填写；不要直接修改Skill内的空白原件。
 
 案例与评估记录位于 `skills/brand-house-assistant/案例库/` 和 `skills/brand-house-assistant/评估记录/`。案例用于回归测试和方法复盘，不作为其他品牌的事实来源；评估记录用于追踪规则变更、已验证能力和仍未完成的实测。
+
+Skill支持公开脱敏案例和本机内部授权案例两种形式。泓一项目的完整交付复盘仅保留在授权机器上；本公开仓库提供去除品牌名称和客户资料的同类案例，用于学习推导顺序、证据处理和提报讲法。
+
+## 跨框架使用
+
+本仓库不要求安装到某个固定 Agent 的目录。使用时遵循三条原则：
+
+1. Skill 内容以 `SKILL.md` 为入口；当前 Agent 读取哪个目录，就以哪个目录作为 `skill_root`。
+2. `agents/openai.yaml` 是可选的 OpenAI/Codex 适配元数据，Claude Code 或其他框架可以忽略，或按自己的格式生成适配文件。
+3. 脚本调用、案例查询和模板复制都使用当前加载的 `skill_root`，不跨框架读取 `~/.codex`、`~/.claude` 或其他目录。
+
+完整的安装、更新、备份和脚本调用流程见 [`skills/brand-house-assistant/跨框架安装与运行.md`](skills/brand-house-assistant/跨框架安装与运行.md)。
 
 正式版本使用 Git 标签记录；`main` 分支保存当前稳定版。
 

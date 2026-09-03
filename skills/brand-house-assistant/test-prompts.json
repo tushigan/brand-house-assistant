@@ -46,5 +46,17 @@
     "scene": "从零构建",
     "prompt": "品牌屋各字段已经确认，请帮我形成一份可编辑的标准品牌屋模型。不要带入其他品牌案例，也不要制作提报PPT。",
     "expected": "复制assets/品牌屋标准模型-纯CSS可编辑版.html到当前项目目录并重命名，在项目副本中填写已经确认的结论；不得修改Skill内原件，不得带入案例库或其他品牌内容；未确认字段保持空白或明确标注状态；交付的是可直接编辑、保存版本和导入导出的品牌屋模型，不扩展成提报PPT或HTML演示稿。"
+  },
+  {
+    "id": "retrieve-best-practice-case",
+    "scene": "案例查询",
+    "prompt": "请告诉我这个Skill里有哪些品牌屋最佳实践案例。我想参考之前泓一项目是怎样从MVV推导到定位、RTB、品牌主张、品牌个性和提报逐字稿的。",
+    "expected": "先读取案例库/README.md并列出匹配案例，再读取泓一完整案例；明确它是内部授权案例，区分最终交付结论、会议讨论倾向、待验证事项和可复用方法；不得只引用test-prompts.json，也不得把泓一结论直接复制给新品牌。"
+  },
+  {
+    "id": "portable-skill-path",
+    "scene": "安装与运行",
+    "prompt": "我在Claude Code里安装brand-house-assistant。请检查和运行品牌屋结构脚本，不要读取Codex的Skill目录，也不要把路径写死为~/.codex。",
+    "expected": "使用当前Agent实际加载的Skill目录作为skill_root；不假设或访问其他Agent框架目录；明确agents/openai.yaml只是可选适配元数据；脚本命令使用当前Skill根目录下的scripts，不把~/.codex或CODEX_HOME写入执行路径。"
   }
 ]
