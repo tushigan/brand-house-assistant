@@ -209,7 +209,11 @@ python3 "$brand_house_skill_root/scripts/读取品牌屋知识.py" --模式 '品
 
 ## 八、生成文件与验收
 
-需要生成文件时，复制[品牌屋工作底稿](assets/品牌屋工作底稿.md)或所选工具到用户工作区填写，绝不修改Skill内原件。完成结构化品牌屋Markdown后必须运行：
+需要生成文件时，复制[品牌屋工作底稿](assets/品牌屋工作底稿.md)、[品牌屋标准模型HTML](assets/品牌屋标准模型-纯CSS可编辑版.html)或所选工具到用户工作区填写，绝不修改Skill内原件。
+
+品牌屋标准模型HTML用于承接已裁决或明确标注状态的品牌屋结论。模板保持空白，不自带任何案例品牌答案；每个项目必须复制后重命名，并在项目副本中填写。它是品牌屋模型交付资产，不等同于PPT视觉设计或HTML演示稿制作。
+
+完成结构化品牌屋Markdown后必须运行：
 
 ```bash
 brand_house_skill_root="${CODEX_HOME:-$HOME/.codex}/skills/brand-house-assistant"
